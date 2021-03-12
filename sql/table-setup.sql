@@ -1,70 +1,88 @@
-create database if not exists seriesshelf;
+create database if not exists series_shelf;
 
-use seriesshelf;
+use series_shelf;
 
-drop table if exists actors;
+drop table if exists actor;
 
-CREATE TABLE actors (
-  id int(11) NOT NULL AUTO_INCREMENT,
-  name varchar(64) DEFAULT NULL,
-  surname varchar(64) DEFAULT NULL,
-  age int(3) DEFAULT NULL,
-  PRIMARY KEY (id)
+CREATE TABLE actor (
+  actor_id int NOT NULL AUTO_INCREMENT,
+  first_name varchar(64) NOT NULL,
+  last_name varchar(64) NOT NULL,
+  age int NOT NULL,
+  PRIMARY KEY (actor_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 drop table if exists series;
 
 CREATE TABLE series (
+  series_id int NOT NULL AUTO_INCREMENT,
   title varchar(64) NOT NULL,
-  numberOfSeasons int(3) DEFAULT NULL,
-  platform  varchar(64) DEFAULT NULL,
-  yearOfPremiere int(4) DEFAULT NULL,
-  PRIMARY KEY (title)
+  numberOfSeasons int NOT NULL,
+  platform  varchar(64) NOT NULL,
+  yearOfPremiere int NOT NULL,
+  PRIMARY KEY (series_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-drop table if exists series;
+drop table if exists roles;
 
 CREATE TABLE roles (
-  title varchar(64) NOT NULL,
-  roleName  varchar(64) DEFAULT NULL,
-  actorid int(11) DEFAULT NULL,
-  PRIMARY KEY (roleName),
-  FOREIGN KEY(title) REFERENCES series(title) ON DELETE SET NULL,
-  FOREIGN KEY(actorid) REFERENCES actors(id) ON DELETE SET NULL
+  role_id int NOT NULL AUTO_INCREMENT,
+  role_name  varchar(64) NOT NULL,
+  series_id int NOT NULL,
+  actor_id int NOT NULL,
+  PRIMARY KEY (role_id),
+  FOREIGN KEY(series_id) REFERENCES series(series_id),
+  FOREIGN KEY(actor_id) REFERENCES actor(actor_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-drop table if exists shelfs;
+drop table if exists shelf;
 
-CREATE TABLE shelfs (
+CREATE TABLE shelf (
+  shelf_id int NOT NULL AUTO_INCREMENT,
   title varchar(64) NOT NULL,
-  PRIMARY KEY (title)
+  PRIMARY KEY (shelf_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
 drop table if exists seriesList;
 
 CREATE TABLE seriesList (
-  shelfTitle varchar(64) NOT NULL,
-  seriesTitle varchar(64) NOT NULL,
-  PRIMARY KEY (shelfTitle),
-  FOREIGN KEY(shelfTitle) REFERENCES series(title) ON DELETE SET NULL,
-  FOREIGN KEY(seriesTitle) REFERENCES series(title) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+  shelf_id int NOT NULL,
+  series_id int NOT NULL,
+  PRIMARY KEY (shelf_id, series_id),
+  FOREIGN KEY(shelf_id) REFERENCES shelf(shelf_id),
+  FOREIGN KEY(series_id) REFERENCES series(series_id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 
-INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (1,'Doe','John','john.doe@foo.com', 'HR', 55000.00);
-INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (2,'Public','Mary','mary.public@foo.com', 'Engineering', 75000.00);
-INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (3,'Queue','Susan','susan.queue@foo.com', 'Legal', 130000.00);
+INSERT INTO actor (first_name, last_name, age) VALUES ('Kit','Harington',34);
+INSERT INTO actor (first_name, last_name, age) VALUES ('Sean','Bean',61);
+INSERT INTO actor (first_name, last_name, age) VALUES ('Peter','Dinklage',51);
 
-INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (4,'Williams','David','david.williams@foo.com', 'HR', 120000.00);
-INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (5,'Johnson','Lisa','lisa.johnson@foo.com', 'Engineering', 50000.00);
-INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (6,'Smith','Paul','paul.smith@foo.com', 'Legal', 100000.00);
+INSERT INTO actor (first_name, last_name, age) VALUES ('Ursula','Corbero',31);
+INSERT INTO actor (first_name, last_name, age) VALUES ('Pedro','Alonso',49);
 
-INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (7,'Adams','Carl','carl.adams@foo.com', 'HR', 50000.00);
-INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (8,'Brown','Bill','bill.brown@foo.com', 'Engineering', 50000.00);
-INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (9,'Thomas','Susan','susan.thomas@foo.com', 'Legal', 80000.00);
+INSERT INTO actor (first_name, last_name, age) VALUES ('Jennifer','Connelly',50);
+INSERT INTO actor (first_name, last_name, age) VALUES ('Daveed','Diggs',39);
 
-INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (10,'Davis','John','john.davis@foo.com', 'HR', 45000.00);
-INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (11,'Fowler','Mary','mary.fowler@foo.com', 'Engineering', 65000.00);
-INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (12,'Waters','David','david.waters@foo.com', 'Legal', 90000.00);
+
+INSERT INTO series (title, numberOfSeasons, platform, yearOfPremiere) VALUES ('Game of Thrones',8,'HBO',2011);
+INSERT INTO series (title, numberOfSeasons, platform, yearOfPremiere) VALUES ('Snowpiercer',2,'NETFLIX',2020);
+INSERT INTO series (title, numberOfSeasons, platform, yearOfPremiere) VALUES ('La casa de papel',4,'NETFLIX',2017);
+
+INSERT INTO roles (role_name, series_id, actor_id) VALUES ('Jon Snow',1,1);
+INSERT INTO roles (role_name, series_id, actor_id) VALUES ('Eddard Stark',1,2);
+INSERT INTO roles (role_name, series_id, actor_id) VALUES ('Tyrion Lannister',1,3);
+INSERT INTO roles (role_name, series_id, actor_id) VALUES ('Tokio',3,4);
+INSERT INTO roles (role_name, series_id, actor_id) VALUES ('Berlin',3,5);
+INSERT INTO roles (role_name, series_id, actor_id) VALUES ('Melanie Cavill',2,6);
+INSERT INTO roles (role_name, series_id, actor_id) VALUES ('Andre Layton',2,7);
+INSERT INTO roles (role_name, series_id, actor_id) VALUES ('Wilford',2,2);
+
+INSERT INTO shelf (title) VALUES ('Test');
+
+INSERT INTO seriesList VALUES (1,1);
+
+
+
