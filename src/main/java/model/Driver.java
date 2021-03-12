@@ -8,8 +8,8 @@ public class Driver {
         Connection myConn = null;
         Statement myStmt = null;
         ResultSet myRs = null;
-        Actor actor = new Actor("Adam","Sandler",45);
-        Actor actor2 = new Actor("Hugh","Jackman",52);
+        Actor actor = new Actor("Adam", "Sandler", 45);
+        Actor actor2 = new Actor("Hugh", "Jackman", 52);
 
         try {
             myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/series_shelf", "student", "student");
