@@ -6,8 +6,11 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 public class ActorRepository {
-    private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("testhibernate");
-    private static EntityManager em = factory.createEntityManager();
+    private EntityManager em;
+
+    public ActorRepository(EntityManager em) {
+        this.em = em;
+    }
 
     public void createNewActor(String firstname, String lastname, int age) {
         System.out.println("============CREATE================");

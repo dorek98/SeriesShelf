@@ -25,7 +25,7 @@ CREATE TABLE series (
 
 drop table if exists roles;
 
-CREATE TABLE roles (
+CREATE TABLE `role` (
   role_id int NOT NULL AUTO_INCREMENT,
   role_name  varchar(64) NOT NULL,
   series_id int NOT NULL,
@@ -55,30 +55,18 @@ CREATE TABLE seriesList (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
+INSERT INTO actor (first_name, last_name, age) VALUES 
+('Kit','Harington',34),('Sean','Bean',61),('Peter','Dinklage',51),
+('Ursula','Corbero',31),('Pedro','Alonso',49),
+('Jennifer','Connelly',50),('Daveed','Diggs',39);
 
-INSERT INTO actor (first_name, last_name, age) VALUES ('Kit','Harington',34);
-INSERT INTO actor (first_name, last_name, age) VALUES ('Sean','Bean',61);
-INSERT INTO actor (first_name, last_name, age) VALUES ('Peter','Dinklage',51);
+INSERT INTO series (title, numberOfSeasons, platform, yearOfPremiere) VALUES 
+('Game of Thrones',8,'HBO',2011),('Snowpiercer',2,'NETFLIX',2020),('La casa de papel',4,'NETFLIX',2017) ;
 
-INSERT INTO actor (first_name, last_name, age) VALUES ('Ursula','Corbero',31);
-INSERT INTO actor (first_name, last_name, age) VALUES ('Pedro','Alonso',49);
-
-INSERT INTO actor (first_name, last_name, age) VALUES ('Jennifer','Connelly',50);
-INSERT INTO actor (first_name, last_name, age) VALUES ('Daveed','Diggs',39);
-
-
-INSERT INTO series (title, numberOfSeasons, platform, yearOfPremiere) VALUES ('Game of Thrones',8,'HBO',2011);
-INSERT INTO series (title, numberOfSeasons, platform, yearOfPremiere) VALUES ('Snowpiercer',2,'NETFLIX',2020);
-INSERT INTO series (title, numberOfSeasons, platform, yearOfPremiere) VALUES ('La casa de papel',4,'NETFLIX',2017);
-
-INSERT INTO roles (role_name, series_id, actor_id) VALUES ('Jon Snow',1,1);
-INSERT INTO roles (role_name, series_id, actor_id) VALUES ('Eddard Stark',1,2);
-INSERT INTO roles (role_name, series_id, actor_id) VALUES ('Tyrion Lannister',1,3);
-INSERT INTO roles (role_name, series_id, actor_id) VALUES ('Tokio',3,4);
-INSERT INTO roles (role_name, series_id, actor_id) VALUES ('Berlin',3,5);
-INSERT INTO roles (role_name, series_id, actor_id) VALUES ('Melanie Cavill',2,6);
-INSERT INTO roles (role_name, series_id, actor_id) VALUES ('Andre Layton',2,7);
-INSERT INTO roles (role_name, series_id, actor_id) VALUES ('Wilford',2,2);
+INSERT INTO `role` (role_name, series_id, actor_id) 
+VALUES ('Jon Snow',1,1),('Eddard Stark',1,2),('Tyrion Lannister',1,3),
+('Tokio',3,4),('Berlin',3,5),
+('Melanie Cavill',2,6),('Andre Layton',2,7),('Wilford',2,2);
 
 INSERT INTO shelf (title) VALUES ('Test');
 

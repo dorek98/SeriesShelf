@@ -1,15 +1,20 @@
 package model;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "series")
 public class Series {
-    private final String title;
-    private final int numberOfSeasons;
-    private final Platform platform;
-    private final int yearOfPremiere;
-    private final Map<String, Actor> mainRoles = new HashMap<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private  long series_id;
+    private  String title;
+    private  int numberOfSeasons;
+    private  Platform platform;
+    private  int yearOfPremiere;
 
+    public Series() {
+    }
     public Series(String title, int numberOfSeasons, Platform platform, int yearOfPremiere) {
         this.title = title;
         this.numberOfSeasons = numberOfSeasons;
@@ -17,12 +22,12 @@ public class Series {
         this.yearOfPremiere = yearOfPremiere;
     }
 
-    public void addRole(String role, Actor actor) {
-        if (mainRoles.containsKey(role)) {
-            System.out.println("Character already exist! Adding failed.");
-        } else {
-            mainRoles.put(role, actor);
-        }
+    public Series(long series_id, String title, int numberOfSeasons, Platform platform, int yearOfPremiere) {
+        this.series_id = series_id;
+        this.title = title;
+        this.numberOfSeasons = numberOfSeasons;
+        this.platform = platform;
+        this.yearOfPremiere = yearOfPremiere;
     }
 
     public String getTitle() {
@@ -41,7 +46,38 @@ public class Series {
         return yearOfPremiere;
     }
 
-    public Map<String, Actor> getMainRoles() {
-        return mainRoles;
+    public long getSeries_id() {
+        return series_id;
     }
+
+    public void setSeries_id(long series_id) {
+        this.series_id = series_id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setNumberOfSeasons(int numberOfSeasons) {
+        this.numberOfSeasons = numberOfSeasons;
+    }
+
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
+    }
+
+    public void setYearOfPremiere(int yearOfPremiere) {
+        this.yearOfPremiere = yearOfPremiere;
+    }
+
+    /*
+    public void addRole(String role, Actor actor) {
+        if (mainRoles.containsKey(role)) {
+            System.out.println("Character already exist! Adding failed.");
+        } else {
+            mainRoles.put(role, actor);
+        }
+    }
+*/
+
 }
