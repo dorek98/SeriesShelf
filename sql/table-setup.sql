@@ -23,7 +23,7 @@ CREATE TABLE series (
   PRIMARY KEY (series_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-drop table if exists roles;
+drop table if exists `role`;
 
 CREATE TABLE `role` (
   role_id int NOT NULL AUTO_INCREMENT,

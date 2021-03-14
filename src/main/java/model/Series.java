@@ -1,15 +1,19 @@
 package model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "series")
 public class Series {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  long series_id;
     private  String title;
+    @OneToMany(mappedBy = "series")
+    private Set<Role> roles;
     private  int numberOfSeasons;
+    @Enumerated(EnumType.STRING)
     private  Platform platform;
     private  int yearOfPremiere;
 

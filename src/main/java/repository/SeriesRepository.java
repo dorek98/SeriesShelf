@@ -1,4 +1,7 @@
-package model;
+package repository;
+
+import model.Platform;
+import model.Series;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;

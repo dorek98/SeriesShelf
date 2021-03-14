@@ -1,4 +1,8 @@
-package model;
+package repository;
+
+import model.Actor;
+import model.Role;
+import model.Series;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;

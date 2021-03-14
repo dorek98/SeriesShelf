@@ -7,14 +7,16 @@ import javax.persistence.*;
 @Table(name = "role")
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long role_id;
 
     @Column(name = "role_name")
     private String roleName;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "series_id", nullable = false)
     private Series series;
     @OneToOne
+    @JoinColumn(name = "actor_id", nullable = false)
     private Actor actor;
 
     public Role() {

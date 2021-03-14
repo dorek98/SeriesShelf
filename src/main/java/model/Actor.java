@@ -8,7 +8,7 @@ import java.sql.Statement;
 @Table(name = "actor")
 public class Actor {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long actor_id;
     @Column(name = "first_name", nullable = false)
     private String firstname;
