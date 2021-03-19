@@ -2,10 +2,8 @@ package repository;
 
 import model.Actor;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
+import java.util.List;
 
 public class ActorRepository {
     private EntityManager em;
@@ -14,12 +12,10 @@ public class ActorRepository {
         this.em = em;
     }
 
-    public void createNewActor(String firstname, String lastname, int age) {
-        Actor newActor = new Actor(firstname, lastname, age);
+    public void save(Actor actor) {
         EntityTransaction transaction = em.getTransaction();
-
         transaction.begin();
-        em.persist(newActor);
+        em.persist(actor);
         transaction.commit();
     }
 
@@ -27,16 +23,27 @@ public class ActorRepository {
         return em.find(Actor.class, id);
     }
 
-    public void updateAge(Actor actor, int newAge) {
+    public List<Actor> getAll() {
+        return em.createQuery("select a from Actor a", Actor.class).getResultList();
+    }
+
+    public Actor getActorByName(String firstname) {
+        TypedQuery<Actor> query = em.createQuery(" select a from Actor a where first_name like ?1", Actor.class);
+        return query.setParameter(1, "%" + firstname + "%").getSingleResult();
+    }
+
+    public void updateActor(long id, Actor actor) {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
-        actor.setAge(newAge);
+        Actor updatedActor = findById(id);
+        updatedActor.setFirstName(actor.getFirstName());
+        updatedActor.setLastName(actor.getLastName());
+        updatedActor.setAge(actor.getAge());
         transaction.commit();
     }
 
     public void delete(Actor actor) {
         EntityTransaction transaction = em.getTransaction();
-        System.out.println("===========DELETE =========");
         transaction.begin();
         em.remove(actor);
         transaction.commit();

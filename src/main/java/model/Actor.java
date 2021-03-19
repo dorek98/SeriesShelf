@@ -1,8 +1,8 @@
 package model;
 
 import javax.persistence.*;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "actor")
@@ -10,18 +10,24 @@ public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long actor_id;
+
     @Column(name = "first_name", nullable = false)
-    private String firstname;
+    private String firstName;
     @Column(name = "last_name", nullable = false)
-    private String lastname;
+    private String lastName;
+
     private int age;
+    @OneToMany(mappedBy = "actor")
+    private List<Role> roles = new ArrayList<>();
+    ;
+
 
     public Actor() {
     }
 
-    public Actor(String firstname, String lastname, int age) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public Actor(String firstName, String lastName, int age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.age = age;
     }
 
@@ -29,41 +35,45 @@ public class Actor {
         return actor_id;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
     public int getAge() {
         return age;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setAge(int age) {
         this.age = age;
     }
 
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "Actor{" +
                 "actor_id=" + actor_id +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", age=" + age +
                 '}';
-    }
-
-    public int addToDB(Statement myStmt) throws SQLException {
-        return myStmt.executeUpdate("INSERT INTO actor (first_name, last_name, age) VALUES (" + firstname + "," + lastname + "," + age + ")");
     }
 }

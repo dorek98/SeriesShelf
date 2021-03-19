@@ -12,10 +12,12 @@ public class Role {
 
     @Column(name = "role_name")
     private String roleName;
+
     @ManyToOne
     @JoinColumn(name = "series_id", nullable = false)
     private Series series;
-    @OneToOne
+
+    @ManyToOne
     @JoinColumn(name = "actor_id", nullable = false)
     private Actor actor;
 
@@ -23,13 +25,6 @@ public class Role {
     }
 
     public Role(String roleName, Series series, Actor actor) {
-        this.roleName = roleName;
-        this.series = series;
-        this.actor = actor;
-    }
-
-    public Role(long role_id, String roleName, Series series, Actor actor) {
-        this.role_id = role_id;
         this.roleName = roleName;
         this.series = series;
         this.actor = actor;
@@ -43,27 +38,33 @@ public class Role {
         return roleName;
     }
 
-    public Series getSeries() {
-        return series;
-    }
-
-    public Actor getActor() {
-        return actor;
-    }
-
-    public void setRole_id(long role_id) {
-        this.role_id = role_id;
-    }
-
     public void setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+
+    public Series getSeries() {
+        return series;
     }
 
     public void setSeries(Series series) {
         this.series = series;
     }
 
+    public Actor getActor() {
+        return actor;
+    }
+
     public void setActor(Actor actor) {
         this.actor = actor;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "role_id=" + role_id +
+                ", roleName='" + roleName + '\'' +
+                ", series=" + series +
+                ", actor=" + actor +
+                "}\n";
     }
 }
