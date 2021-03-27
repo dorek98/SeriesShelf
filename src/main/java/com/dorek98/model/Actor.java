@@ -1,9 +1,12 @@
-package model;
+package com.dorek98.model;
+
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 @Entity
 @Table(name = "actor")
 public class Actor {
@@ -29,22 +32,6 @@ public class Actor {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-    }
-
-    public Long getActor_id() {
-        return actor_id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public int getAge() {
-        return age;
     }
 
     public void setFirstName(String firstName) {

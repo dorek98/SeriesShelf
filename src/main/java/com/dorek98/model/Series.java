@@ -1,9 +1,12 @@
-package model;
+package com.dorek98.model;
+
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 @Entity
 @Table(name = "series")
 public class Series {
@@ -30,45 +33,25 @@ public class Series {
         this.yearOfPremiere = yearOfPremiere;
     }
 
-    public long getSeries_id() {
-        return series_id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public List<Role> getRoles() {
-        return roles;
-    }
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
-    public int getNumberOfSeasons() {
-        return numberOfSeasons;
-    }
 
     public void setNumberOfSeasons(int numberOfSeasons) {
         this.numberOfSeasons = numberOfSeasons;
     }
 
-    public Platform getPlatform() {
-        return platform;
-    }
 
     public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 
-    public int getYearOfPremiere() {
-        return yearOfPremiere;
-    }
 
     public void setYearOfPremiere(int yearOfPremiere) {
         this.yearOfPremiere = yearOfPremiere;

@@ -1,8 +1,11 @@
-package model;
+package com.dorek98.model;
 
+
+import lombok.Getter;
 
 import javax.persistence.*;
 
+@Getter
 @Entity
 @Table(name = "role")
 public class Role {
@@ -30,28 +33,12 @@ public class Role {
         this.actor = actor;
     }
 
-    public long getRole_id() {
-        return role_id;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
 
-    public Series getSeries() {
-        return series;
-    }
-
     public void setSeries(Series series) {
         this.series = series;
-    }
-
-    public Actor getActor() {
-        return actor;
     }
 
     public void setActor(Actor actor) {

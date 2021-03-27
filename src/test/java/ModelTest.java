@@ -1,7 +1,4 @@
-import model.*;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import com.dorek98.model.*;
 
 public class ModelTest {
 /*
