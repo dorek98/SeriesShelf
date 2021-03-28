@@ -25,7 +25,13 @@ public class ActorService {
         return actorRepository.findByFirstName(name).getLastName();
     }
 
-    public Actor getActor(String name){
+    public Actor getActorByName(String name){
         return actorRepository.findByFirstName(name);
     }
+
+    public Actor getActorById(long id){
+        return actorRepository.getOne(id);
+    }
+
+
 }

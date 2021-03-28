@@ -3,11 +3,8 @@ package com.dorek98.dto;
 import lombok.Value;
 
 @Value
-public class RoleDto {
-
-    long id;
+public class RoleRequest {
     String roleName;
     long seriesId;
     long actorId;
-
 }

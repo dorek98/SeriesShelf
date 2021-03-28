@@ -22,8 +22,6 @@ public class Actor {
     private int age;
     @OneToMany(mappedBy = "actor")
     private List<Role> roles = new ArrayList<>();
-    ;
-
 
     public Actor() {
     }

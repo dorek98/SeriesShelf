@@ -14,14 +14,15 @@ public class Series {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long series_id;
     private String title;
-
-    @OneToMany(mappedBy = "series")
-    private List<Role> roles = new ArrayList<>();
-
     private int numberOfSeasons;
     @Enumerated(EnumType.STRING)
     private Platform platform;
     private int yearOfPremiere;
+
+
+    @OneToMany(mappedBy = "series")
+    private List<Role> roles = new ArrayList<>();
+
 
     public Series() {
     }
