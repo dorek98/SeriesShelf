@@ -3,7 +3,6 @@ package com.dorek98.model;
 import lombok.Getter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -14,14 +13,12 @@ public class Actor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long actor_id;
 
-    @Column(name = "first_name", nullable = false)
     private String firstName;
-    @Column(name = "last_name", nullable = false)
     private String lastName;
-
     private int age;
+
     @OneToMany(mappedBy = "actor")
-    private List<Role> roles = new ArrayList<>();
+    private List<Role> roles;
 
     public Actor() {
     }

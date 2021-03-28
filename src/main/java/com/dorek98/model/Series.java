@@ -3,7 +3,6 @@ package com.dorek98.model;
 import lombok.Getter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -21,7 +20,7 @@ public class Series {
 
 
     @OneToMany(mappedBy = "series")
-    private List<Role> roles = new ArrayList<>();
+    private List<Role> roles;
 
 
     public Series() {

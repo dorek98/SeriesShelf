@@ -13,7 +13,6 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long role_id;
 
-    @Column(name = "role_name")
     private String roleName;
 
     @ManyToOne

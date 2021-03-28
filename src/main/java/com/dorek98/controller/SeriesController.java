@@ -18,17 +18,17 @@ public class SeriesController {
     private final SeriesService seriesService;
 
     @GetMapping
-    public List<SeriesDto> getSeries(){
+    public List<SeriesDto> getSeries() {
         return seriesMapper.listToDto(seriesService.getAll());
     }
 
     @GetMapping("/{id}")
-    public SeriesDto getById(@PathVariable long id){
+    public SeriesDto getById(@PathVariable long id) {
         return seriesMapper.createSeriesDto(seriesService.getSeriesById(id));
     }
 
     @PostMapping
-    public Series create(final SeriesRequest request){
-        return seriesService.save(seriesMapper.seriesRequest(request));
+    public Series create(final SeriesRequest request) {
+        return seriesService.save(seriesMapper.createSeries(request));
     }
 }

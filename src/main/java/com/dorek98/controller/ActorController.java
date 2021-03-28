@@ -19,18 +19,18 @@ public class ActorController {
     private final ActorMapper actorMapper;
 
     @GetMapping
-    public List<ActorDto> getActors(){
+    public List<ActorDto> getActors() {
         return actorMapper.listToDto(actorService.getAll());
     }
 
     @GetMapping("/{id}")
-    public ActorDto getById(@PathVariable long id){
+    public ActorDto getById(@PathVariable long id) {
         return actorMapper.createActorDto(actorService.getActorById(id));
     }
 
     @PostMapping
-    public Actor create(final ActorRequest request){
-        return actorService.save(actorMapper.actorRequest(request));
+    public Actor create(final ActorRequest request) {
+        return actorService.save(actorMapper.createActor(request));
     }
 
 }

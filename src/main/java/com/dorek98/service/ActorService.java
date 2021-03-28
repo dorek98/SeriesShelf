@@ -13,23 +13,15 @@ public class ActorService {
 
     private final ActorRepository actorRepository;
 
-    public Actor save(Actor actor){
+    public Actor save(Actor actor) {
         return actorRepository.save(actor);
     }
 
-    public List<Actor> getAll(){
+    public List<Actor> getAll() {
         return actorRepository.findAll();
     }
 
-    public String getLastName(String name){
-        return actorRepository.findByFirstName(name).getLastName();
-    }
-
-    public Actor getActorByName(String name){
-        return actorRepository.findByFirstName(name);
-    }
-
-    public Actor getActorById(long id){
+    public Actor getActorById(long id) {
         return actorRepository.getOne(id);
     }
 

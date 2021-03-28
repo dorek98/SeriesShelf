@@ -1,6 +1,5 @@
 package com.dorek98.model;
 
-import com.dorek98.repository.RoleRepository;
 import com.dorek98.service.ActorService;
 import com.dorek98.service.RoleService;
 import com.dorek98.service.SeriesService;
