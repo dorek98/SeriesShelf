@@ -1,13 +1,13 @@
 package com.dorek98.service.role;
 
-import com.dorek98.model.Role;
+import com.dorek98.dto.RoleRegistration;
 import org.springframework.stereotype.Service;
 
 
 @Service
 public interface RoleCommandHandler {
 
-    void save(Role role);
+    void save(RoleRegistration role);
 
-    void update(long id, Role role);
+    void updateRoleName(long id, String roleName);
 }

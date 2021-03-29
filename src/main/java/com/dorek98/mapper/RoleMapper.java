@@ -1,15 +1,10 @@
 package com.dorek98.mapper;
 
-import com.dorek98.dto.ActorRegistration;
 import com.dorek98.dto.RoleDetails;
 import com.dorek98.dto.RoleRegistration;
 import com.dorek98.model.Role;
 import com.dorek98.repository.ActorRepository;
 import com.dorek98.repository.SeriesRepository;
-import com.dorek98.service.*;
-import com.dorek98.service.actor.ActorCommandHandlerImpl;
-import com.dorek98.service.actor.ActorQueryHandlerImpl;
-import com.dorek98.service.series.SeriesQueryHandlerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -33,7 +28,7 @@ public class RoleMapper {
         return new Role(role.getRoleName(), seriesRepository.getOne(role.getSeriesId()), actorRepository.getOne(role.getActorId()));
     }
 
-    public List<RoleDetails> listToDto(List<Role> roles) {
+    public List<RoleDetails> listToDetails(List<Role> roles) {
         List<RoleDetails> rolesDetails = new ArrayList<>();
         for (Role r : roles) {
             rolesDetails.add(createRoleDetails(r));

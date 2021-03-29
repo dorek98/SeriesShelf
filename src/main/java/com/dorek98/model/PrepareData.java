@@ -14,10 +14,7 @@ public class PrepareData implements ApplicationRunner {
     private ActorCommandHandlerImpl commandHandler;
     @Autowired
     private ActorQueryHandlerImpl queryHandler;
-    @Autowired
-    private SeriesService seriesService;
-    @Autowired
-    private RoleService roleService;
+
 
     @Override
     public void run(ApplicationArguments args) throws Exception {

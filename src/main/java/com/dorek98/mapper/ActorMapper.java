@@ -16,7 +16,7 @@ public class ActorMapper {
     private RoleMapper roleMapper;
 
     public ActorDetails createActorDetails(Actor actor) {
-        return new ActorDetails(actor.getActor_id(), actor.getFirstName(), actor.getLastName(), actor.getAge(), roleMapper.listToDto(actor.getRoles()));
+        return new ActorDetails(actor.getActor_id(), actor.getFirstName(), actor.getLastName(), actor.getAge(), roleMapper.listToDetails(actor.getRoles()));
     }
 
     public Actor createActor(ActorRegistration actor) {

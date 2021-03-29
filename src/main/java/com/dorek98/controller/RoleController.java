@@ -2,7 +2,6 @@ package com.dorek98.controller;
 
 import com.dorek98.dto.RoleDetails;
 import com.dorek98.dto.RoleRegistration;
-import com.dorek98.mapper.RoleMapper;
 import com.dorek98.service.role.RoleCommandHandlerImpl;
 import com.dorek98.service.role.RoleQueryHandlerImpl;
 import lombok.AllArgsConstructor;
@@ -17,20 +16,24 @@ public class RoleController {
 
     private final RoleCommandHandlerImpl commandHandler;
     private final RoleQueryHandlerImpl queryHandler;
-    private final RoleMapper roleMapper;
 
     @GetMapping
     public List<RoleDetails> getRoles() {
-        return roleMapper.listToDto(queryHandler.findAll());
+        return queryHandler.findAll();
     }
 
     @GetMapping("/{id}")
     public RoleDetails getById(@PathVariable long id) {
-        return roleMapper.createRoleDetails(queryHandler.findById(id));
+        return queryHandler.findById(id);
     }
 
     @PostMapping
-    public void create(final RoleRegistration request) {
-        commandHandler.save(roleMapper.createRole(request));
+    public void create(final RoleRegistration roleRegistration) {
+        commandHandler.save(roleRegistration);
+    }
+
+    @PutMapping("/{id}")
+    public void updateRoleName(long id, String roleName){
+        commandHandler.updateRoleName(id,roleName);
     }
 }

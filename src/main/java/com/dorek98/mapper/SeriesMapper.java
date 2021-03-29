@@ -15,18 +15,18 @@ public class SeriesMapper {
     @Autowired
     private RoleMapper roleMapper;
 
-    public SeriesDetails createSeriesDto(Series series) {
-        return new SeriesDetails(series.getSeries_id(), series.getTitle(), series.getNumberOfSeasons(), series.getPlatform(), series.getYearOfPremiere(), roleMapper.listToDto(series.getRoles()));
+    public SeriesDetails createSeriesDetails(Series series) {
+        return new SeriesDetails(series.getSeries_id(), series.getTitle(), series.getNumberOfSeasons(), series.getPlatform(), series.getYearOfPremiere(), roleMapper.listToDetails(series.getRoles()));
     }
 
     public Series createSeries(SeriesRegistration request) {
         return new Series(request.getTitle(), request.getNumberOfSeasons(), request.getPlatform(), request.getYearOfPremiere());
     }
 
-    public List<SeriesDetails> listToDto(List<Series> series) {
+    public List<SeriesDetails> listToDetails(List<Series> series) {
         List<SeriesDetails> seriesDtos = new ArrayList<>();
         for (Series s : series) {
-            seriesDtos.add(createSeriesDto(s));
+            seriesDtos.add(createSeriesDetails(s));
         }
         return seriesDtos;
     }

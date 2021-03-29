@@ -2,7 +2,6 @@ package com.dorek98.controller;
 
 import com.dorek98.dto.SeriesDetails;
 import com.dorek98.dto.SeriesRegistration;
-import com.dorek98.mapper.SeriesMapper;
 import com.dorek98.service.series.SeriesCommandHandlerImpl;
 import com.dorek98.service.series.SeriesQueryHandlerImpl;
 import lombok.AllArgsConstructor;
@@ -14,22 +13,26 @@ import java.util.List;
 @RequestMapping("/api/seriesshelf/series")
 @AllArgsConstructor
 public class SeriesController {
-    private final SeriesMapper seriesMapper;
     private final SeriesCommandHandlerImpl commandHandler;
     private final SeriesQueryHandlerImpl queryHandler;
 
     @GetMapping
     public List<SeriesDetails> getSeries() {
-        return seriesMapper.listToDto(queryHandler.findAll());
+        return queryHandler.findAll();
     }
 
     @GetMapping("/{id}")
     public SeriesDetails getById(@PathVariable long id) {
-        return seriesMapper.createSeriesDto(queryHandler.findById(id));
+        return queryHandler.findById(id);
     }
 
     @PostMapping
-    public void create(final SeriesRegistration request) {
-        commandHandler.save(seriesMapper.createSeries(request));
+    public void create(final SeriesRegistration seriesRegistration) {
+        commandHandler.save(seriesRegistration);
+    }
+
+    @PutMapping("/{id}")
+    public void update(long id, final SeriesRegistration seriesRegistration) {
+        commandHandler.update(id, seriesRegistration);
     }
 }

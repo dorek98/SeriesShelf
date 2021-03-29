@@ -2,7 +2,6 @@ package com.dorek98.controller;
 
 import com.dorek98.dto.ActorDetails;
 import com.dorek98.dto.ActorRegistration;
-import com.dorek98.mapper.ActorMapper;
 import com.dorek98.service.actor.ActorCommandHandlerImpl;
 import com.dorek98.service.actor.ActorQueryHandlerImpl;
 import lombok.AllArgsConstructor;
@@ -17,7 +16,6 @@ public class ActorController {
 
     private final ActorCommandHandlerImpl commandHandler;
     private final ActorQueryHandlerImpl queryHandler;
-    private final ActorMapper actorMapper;
 
     @GetMapping
     public List<ActorDetails> getActors() {

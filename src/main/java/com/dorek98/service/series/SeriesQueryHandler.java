@@ -1,6 +1,6 @@
 package com.dorek98.service.series;
 
-import com.dorek98.model.Series;
+import com.dorek98.dto.SeriesDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,9 +8,9 @@ import java.util.List;
 @Service
 public interface SeriesQueryHandler {
 
-    List<Series> findAll();
+    List<SeriesDetails> findAll();
 
-    Series findById(long id);
+    SeriesDetails findById(long id);
 
     //TODO: Actor findByName(String firstName);
 }
