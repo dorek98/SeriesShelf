@@ -3,7 +3,7 @@ package com.dorek98.dto;
 import lombok.Value;
 
 @Value
-public class RoleDto {
+public class RoleDetails {
 
     long id;
     String roleName;

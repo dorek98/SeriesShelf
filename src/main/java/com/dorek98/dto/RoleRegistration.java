@@ -3,7 +3,7 @@ package com.dorek98.dto;
 import lombok.Value;
 
 @Value
-public class RoleRequest {
+public class RoleRegistration {
     String roleName;
     long seriesId;
     long actorId;

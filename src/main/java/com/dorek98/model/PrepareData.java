@@ -1,8 +1,8 @@
 package com.dorek98.model;
 
-import com.dorek98.service.ActorService;
-import com.dorek98.service.RoleService;
-import com.dorek98.service.SeriesService;
+import com.dorek98.service.*;
+import com.dorek98.service.actor.ActorCommandHandlerImpl;
+import com.dorek98.service.actor.ActorQueryHandlerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -11,7 +11,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class PrepareData implements ApplicationRunner {
     @Autowired
-    private ActorService actorService;
+    private ActorCommandHandlerImpl commandHandler;
+    @Autowired
+    private ActorQueryHandlerImpl queryHandler;
     @Autowired
     private SeriesService seriesService;
     @Autowired

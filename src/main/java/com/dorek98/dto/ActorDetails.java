@@ -5,11 +5,11 @@ import lombok.Value;
 import java.util.List;
 
 @Value
-public class ActorDto {
+public class ActorDetails {
 
     long id;
     String firstName;
     String lastName;
     int Age;
-    List<RoleDto> roles;
+    List<RoleDetails> roles;
 }

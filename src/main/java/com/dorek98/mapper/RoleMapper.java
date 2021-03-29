@@ -1,10 +1,15 @@
 package com.dorek98.mapper;
 
-import com.dorek98.dto.RoleDto;
-import com.dorek98.dto.RoleRequest;
+import com.dorek98.dto.ActorRegistration;
+import com.dorek98.dto.RoleDetails;
+import com.dorek98.dto.RoleRegistration;
 import com.dorek98.model.Role;
-import com.dorek98.service.ActorService;
-import com.dorek98.service.SeriesService;
+import com.dorek98.repository.ActorRepository;
+import com.dorek98.repository.SeriesRepository;
+import com.dorek98.service.*;
+import com.dorek98.service.actor.ActorCommandHandlerImpl;
+import com.dorek98.service.actor.ActorQueryHandlerImpl;
+import com.dorek98.service.series.SeriesQueryHandlerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,24 +20,24 @@ import java.util.List;
 public class RoleMapper {
 
     @Autowired
-    SeriesService seriesService;
+    ActorRepository actorRepository;
 
     @Autowired
-    ActorService actorService;
+    SeriesRepository seriesRepository;
 
-    public RoleDto createRoleDto(Role role) {
-        return new RoleDto(role.getRole_id(), role.getRoleName(), role.getSeries().getSeries_id(), role.getActor().getActor_id());
+    public RoleDetails createRoleDetails(Role role) {
+        return new RoleDetails(role.getRole_id(), role.getRoleName(), role.getSeries().getSeries_id(), role.getActor().getActor_id());
     }
 
-    public Role createRole(RoleRequest request) {
-        return new Role(request.getRoleName(), seriesService.getSeriesById(request.getSeriesId()), actorService.getActorById(request.getActorId()));
+    public Role createRole(RoleRegistration role) {
+        return new Role(role.getRoleName(), seriesRepository.getOne(role.getSeriesId()), actorRepository.getOne(role.getActorId()));
     }
 
-    public List<RoleDto> listToDto(List<Role> roles) {
-        List<RoleDto> roleDtos = new ArrayList<>();
+    public List<RoleDetails> listToDto(List<Role> roles) {
+        List<RoleDetails> rolesDetails = new ArrayList<>();
         for (Role r : roles) {
-            roleDtos.add(createRoleDto(r));
+            rolesDetails.add(createRoleDetails(r));
         }
-        return roleDtos;
+        return rolesDetails;
     }
 }

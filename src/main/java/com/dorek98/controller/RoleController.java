@@ -1,35 +1,36 @@
 package com.dorek98.controller;
 
-import com.dorek98.dto.RoleDto;
-import com.dorek98.dto.RoleRequest;
+import com.dorek98.dto.RoleDetails;
+import com.dorek98.dto.RoleRegistration;
 import com.dorek98.mapper.RoleMapper;
-import com.dorek98.model.Role;
-import com.dorek98.service.RoleService;
+import com.dorek98.service.role.RoleCommandHandlerImpl;
+import com.dorek98.service.role.RoleQueryHandlerImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/api/seriesshelf/roles")
+@AllArgsConstructor
 public class RoleController {
 
-    private final RoleService roleService;
+    private final RoleCommandHandlerImpl commandHandler;
+    private final RoleQueryHandlerImpl queryHandler;
     private final RoleMapper roleMapper;
 
     @GetMapping
-    public List<RoleDto> getRoles() {
-        return roleMapper.listToDto(roleService.getAll());
+    public List<RoleDetails> getRoles() {
+        return roleMapper.listToDto(queryHandler.findAll());
     }
 
     @GetMapping("/{id}")
-    public RoleDto getById(@PathVariable long id) {
-        return roleMapper.createRoleDto(roleService.getRole(id));
+    public RoleDetails getById(@PathVariable long id) {
+        return roleMapper.createRoleDetails(queryHandler.findById(id));
     }
 
     @PostMapping
-    public Role create(final RoleRequest request) {
-        return roleService.save(roleMapper.createRole(request));
+    public void create(final RoleRegistration request) {
+        commandHandler.save(roleMapper.createRole(request));
     }
 }
