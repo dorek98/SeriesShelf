@@ -1,6 +1,5 @@
 package com.dorek98.model;
 
-import com.dorek98.service.*;
 import com.dorek98.service.actor.ActorCommandHandlerImpl;
 import com.dorek98.service.actor.ActorQueryHandlerImpl;
 import org.springframework.beans.factory.annotation.Autowired;

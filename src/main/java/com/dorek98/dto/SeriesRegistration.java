@@ -3,11 +3,19 @@ package com.dorek98.dto;
 import com.dorek98.model.Platform;
 import lombok.Value;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
 
 @Value
 public class SeriesRegistration {
+    @NotBlank
     String title;
+    @Positive
     int numberOfSeasons;
+    @NotNull
     Platform platform;
+    @Positive
     int yearOfPremiere;
 }

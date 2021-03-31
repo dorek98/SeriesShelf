@@ -3,6 +3,8 @@ package com.dorek98.model;
 import lombok.Getter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import java.util.List;
 
 @Getter
@@ -12,9 +14,11 @@ public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long actor_id;
-
+    @NotBlank
     private String firstName;
+    @NotBlank
     private String lastName;
+    @Positive
     private int age;
 
     @OneToMany(mappedBy = "actor")

@@ -5,9 +5,11 @@ import com.dorek98.dto.ActorRegistration;
 import com.dorek98.service.actor.ActorCommandHandlerImpl;
 import com.dorek98.service.actor.ActorQueryHandlerImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/seriesshelf/actors")
@@ -22,9 +24,13 @@ public class ActorController {
         return queryHandler.findAll();
     }
 
+    //TODO: poprawny status not found jesli id nie istnieje
     @GetMapping("/{id}")
-    public ActorDetails getById(@PathVariable long id) {
-        return queryHandler.findById(id);
+    public ResponseEntity<ActorDetails> getById(@PathVariable long id) {
+        return Optional
+                .ofNullable(queryHandler.findById(id))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
