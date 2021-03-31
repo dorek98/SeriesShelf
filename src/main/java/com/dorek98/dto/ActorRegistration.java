@@ -3,6 +3,7 @@ package com.dorek98.dto;
 import lombok.Value;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 @Value
@@ -12,7 +13,7 @@ public class ActorRegistration {
     String firstName;
     @NotBlank
     String lastName;
-    @NotBlank
     @Positive
+    @NotNull
     int age;
 }

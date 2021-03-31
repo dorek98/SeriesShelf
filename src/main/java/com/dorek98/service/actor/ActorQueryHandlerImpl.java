@@ -7,7 +7,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -24,6 +26,10 @@ public class ActorQueryHandlerImpl implements ActorQueryHandler {
 
     @Override
     public ActorDetails findById(long id) {
-        return actorMapper.createActorDetails(actorRepository.getOne(id));
+        try {
+            return actorMapper.createActorDetails(actorRepository.getOne(id));
+        } catch (EntityNotFoundException ex) {
+            return null;
+        }
     }
 }

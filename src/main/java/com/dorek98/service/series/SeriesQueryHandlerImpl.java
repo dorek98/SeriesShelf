@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @AllArgsConstructor
@@ -24,6 +25,10 @@ public class SeriesQueryHandlerImpl implements SeriesQueryHandler {
 
     @Override
     public SeriesDetails findById(long id) {
-        return seriesMapper.createSeriesDetails(seriesRepository.getOne(id));
+        try {
+            return seriesMapper.createSeriesDetails(seriesRepository.getOne(id));
+        } catch (EntityNotFoundException ex) {
+            return null;
+        }
     }
 }

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @AllArgsConstructor
@@ -24,6 +25,10 @@ public class RoleQueryHandlerImpl implements RoleQueryHandler {
 
     @Override
     public RoleDetails findById(long id) {
-        return roleMapper.createRoleDetails(roleRepository.getOne(id));
+        try {
+            return roleMapper.createRoleDetails(roleRepository.getOne(id));
+        } catch (EntityNotFoundException ex) {
+            return null;
+        }
     }
 }

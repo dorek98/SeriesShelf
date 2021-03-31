@@ -5,9 +5,13 @@ import com.dorek98.dto.SeriesRegistration;
 import com.dorek98.service.series.SeriesCommandHandlerImpl;
 import com.dorek98.service.series.SeriesQueryHandlerImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/seriesshelf/series")
@@ -22,17 +26,25 @@ public class SeriesController {
     }
 
     @GetMapping("/{id}")
-    public SeriesDetails getById(@PathVariable long id) {
-        return queryHandler.findById(id);
+    public ResponseEntity<SeriesDetails> getById(@PathVariable long id) {
+        return Optional
+                .ofNullable(queryHandler.findById(id))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public void create(final SeriesRegistration seriesRegistration) {
+    public ResponseEntity<HttpStatus> create(final @Valid SeriesRegistration seriesRegistration) {
         commandHandler.save(seriesRegistration);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+
     }
 
     @PutMapping("/{id}")
-    public void update(long id, final SeriesRegistration seriesRegistration) {
-        commandHandler.update(id, seriesRegistration);
+    public ResponseEntity<SeriesDetails> update(long id, final SeriesRegistration seriesRegistration) {
+        return Optional
+                .ofNullable(commandHandler.update(id, seriesRegistration))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }

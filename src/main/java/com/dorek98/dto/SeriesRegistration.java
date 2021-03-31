@@ -12,10 +12,12 @@ import javax.validation.constraints.Positive;
 public class SeriesRegistration {
     @NotBlank
     String title;
+    @NotNull
     @Positive
     int numberOfSeasons;
     @NotNull
     Platform platform;
+    @NotNull
     @Positive
     int yearOfPremiere;
 }

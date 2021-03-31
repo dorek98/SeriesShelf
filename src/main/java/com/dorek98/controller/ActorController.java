@@ -5,9 +5,11 @@ import com.dorek98.dto.ActorRegistration;
 import com.dorek98.service.actor.ActorCommandHandlerImpl;
 import com.dorek98.service.actor.ActorQueryHandlerImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +26,6 @@ public class ActorController {
         return queryHandler.findAll();
     }
 
-    //TODO: poprawny status not found jesli id nie istnieje
     @GetMapping("/{id}")
     public ResponseEntity<ActorDetails> getById(@PathVariable long id) {
         return Optional
@@ -34,13 +35,16 @@ public class ActorController {
     }
 
     @PostMapping
-    public void create(final ActorRegistration actorRegistration) {
+    public ResponseEntity<HttpStatus> create(final @Valid ActorRegistration actorRegistration) {
         commandHandler.save(actorRegistration);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable long id, final ActorRegistration actorRegistration){
-        commandHandler.update(id, actorRegistration);
+    public ResponseEntity<ActorDetails> update(@PathVariable long id, final ActorRegistration actorRegistration) {
+        return Optional
+                .ofNullable(commandHandler.update(id, actorRegistration))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
-
 }
