@@ -31,4 +31,13 @@ public class RoleQueryHandlerImpl implements RoleQueryHandler {
             return null;
         }
     }
+
+    @Override
+    public RoleDetails findByName(String name) {
+        try {
+            return roleMapper.createRoleDetails(roleRepository.findByName(name));
+        } catch (EntityNotFoundException ex) {
+            return null;
+        }
+    }
 }

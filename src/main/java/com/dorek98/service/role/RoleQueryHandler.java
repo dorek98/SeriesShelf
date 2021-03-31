@@ -12,5 +12,6 @@ public interface RoleQueryHandler {
 
     RoleDetails findById(long id);
 
-    //TODO: Actor findByName(String firstName);
+    RoleDetails findByName(String name);
+
 }

@@ -12,5 +12,7 @@ public interface ActorQueryHandler {
 
     ActorDetails findById(long id);
 
+    List<ActorDetails> findAdults();
+
     //TODO: Actor findByName(String firstName);
 }

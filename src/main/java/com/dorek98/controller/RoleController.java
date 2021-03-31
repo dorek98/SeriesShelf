@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +31,14 @@ public class RoleController {
     public ResponseEntity<RoleDetails> getById(@PathVariable long id) {
         return Optional
                 .ofNullable(queryHandler.findById(id))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/name")
+    public ResponseEntity<RoleDetails> getByName(@NotBlank String name) {
+        return Optional
+                .ofNullable(queryHandler.findByName(name))
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

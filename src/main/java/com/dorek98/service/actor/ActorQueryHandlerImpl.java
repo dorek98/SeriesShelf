@@ -32,4 +32,9 @@ public class ActorQueryHandlerImpl implements ActorQueryHandler {
             return null;
         }
     }
+
+    @Override
+    public List<ActorDetails> findAdults() {
+        return actorMapper.listToDetails(actorRepository.findAdultActors());
+    }
 }

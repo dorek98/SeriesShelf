@@ -26,6 +26,11 @@ public class ActorController {
         return queryHandler.findAll();
     }
 
+    @GetMapping("/adults")
+    public List<ActorDetails> getAdultActors() {
+        return queryHandler.findAdults();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<ActorDetails> getById(@PathVariable long id) {
         return Optional
