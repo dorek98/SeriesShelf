@@ -11,6 +11,4 @@ public interface SeriesQueryHandler {
     List<SeriesDetails> findAll();
 
     SeriesDetails findById(long id);
-
-    //TODO: Actor findByName(String firstName);
 }

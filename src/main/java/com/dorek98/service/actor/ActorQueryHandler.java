@@ -14,5 +14,4 @@ public interface ActorQueryHandler {
 
     List<ActorDetails> findAdults();
 
-    //TODO: Actor findByName(String firstName);
 }
