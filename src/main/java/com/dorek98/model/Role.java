@@ -16,11 +16,11 @@ public class Role {
     private String roleName;
 
     @ManyToOne
-    @JoinColumn(name = "series_id", nullable = false)
+    @JoinColumn(name = "series_id")
     private Series series;
 
     @ManyToOne
-    @JoinColumn(name = "actor_id", nullable = false)
+    @JoinColumn(name = "actor_id")
     private Actor actor;
 
     public Role() {

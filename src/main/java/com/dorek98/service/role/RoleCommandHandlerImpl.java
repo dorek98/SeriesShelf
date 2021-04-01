@@ -34,4 +34,13 @@ public class RoleCommandHandlerImpl implements RoleCommandHandler {
             return null;
         }
     }
+
+    public boolean delete(long id) {
+        try {
+            roleRepository.deleteById(id);
+            return true;
+        } catch (EntityNotFoundException ex) {
+            return false;
+        }
+    }
 }

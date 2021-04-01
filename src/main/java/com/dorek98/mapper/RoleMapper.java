@@ -21,6 +21,7 @@ public class RoleMapper {
     SeriesRepository seriesRepository;
 
     public RoleDetails createRoleDetails(Role role) {
+
         return new RoleDetails(role.getRole_id(), role.getRoleName(), role.getSeries().getSeries_id(), role.getActor().getActor_id());
     }
 
