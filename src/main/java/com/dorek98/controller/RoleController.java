@@ -29,12 +29,12 @@ public class RoleController {
 
     @GetMapping("/{id}")
     public ResponseEntity<RoleDetails> getById(@PathVariable long id) {
-        return queryHandler.findById(id).isPresent() ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        return queryHandler.findById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/name")
     public ResponseEntity<RoleDetails> getByName(@NotBlank String name) {
-        return queryHandler.findByName(name).isPresent() ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        return queryHandler.findByName(name).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -45,7 +45,7 @@ public class RoleController {
 
     @PutMapping("/{id}")
     public ResponseEntity<RoleDetails> updateRoleName(long id, String roleName) {
-        return commandHandler.updateRoleName(id, roleName).isPresent() ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        return commandHandler.updateRoleName(id, roleName).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")

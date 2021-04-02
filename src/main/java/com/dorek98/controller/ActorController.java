@@ -33,7 +33,7 @@ public class ActorController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ActorDetails> getById(@PathVariable long id) {
-        return queryHandler.findById(id).isPresent() ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        return queryHandler.findById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -44,7 +44,7 @@ public class ActorController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ActorDetails> update(@PathVariable long id, final @Valid ActorRegistration actorRegistration) {
-        return commandHandler.update(id, actorRegistration).isPresent() ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        return commandHandler.update(id, actorRegistration).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
 
