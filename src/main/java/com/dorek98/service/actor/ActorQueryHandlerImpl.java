@@ -25,11 +25,11 @@ public class ActorQueryHandlerImpl implements ActorQueryHandler {
     }
 
     @Override
-    public ActorDetails findById(long id) {
+    public Optional<ActorDetails> findById(long id) {
         try {
-            return actorMapper.createActorDetails(actorRepository.getOne(id));
+            return Optional.of(actorMapper.createActorDetails(actorRepository.getOne(id)));
         } catch (EntityNotFoundException ex) {
-            return null;
+            return Optional.empty();
         }
     }
 

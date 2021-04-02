@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -25,13 +26,13 @@ public class RoleCommandHandlerImpl implements RoleCommandHandler {
     }
 
     @Override
-    public RoleDetails updateRoleName(long id, String roleName) {
+    public Optional<RoleDetails> updateRoleName(long id, String roleName) {
         try {
             Role role = roleRepository.getOne(id);
             role.setRoleName(roleName);
-            return roleMapper.createRoleDetails(roleRepository.save(role));
+            return Optional.of(roleMapper.createRoleDetails(roleRepository.save(role)));
         } catch (EntityNotFoundException ex) {
-            return null;
+            return Optional.empty();
         }
     }
 

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -25,15 +26,15 @@ public class ActorCommandHandlerImpl implements ActorCommandHandler {
     }
 
     @Override
-    public ActorDetails update(long id, ActorRegistration actor) {
+    public Optional<ActorDetails> update(long id, ActorRegistration actor) {
         try {
             Actor oldActor = actorRepository.getOne(id);
             oldActor.setFirstName(actor.getFirstName());
             oldActor.setLastName(actor.getLastName());
             oldActor.setAge(actor.getAge());
-            return actorMapper.createActorDetails(actorRepository.save(oldActor));
+            return Optional.of(actorMapper.createActorDetails(actorRepository.save(oldActor)));
         } catch (EntityNotFoundException ex) {
-            return null;
+            return Optional.empty();
         }
     }
 }

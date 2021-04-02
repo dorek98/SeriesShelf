@@ -4,11 +4,12 @@ import com.dorek98.dto.SeriesDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public interface SeriesQueryHandler {
 
     List<SeriesDetails> findAll();
 
-    SeriesDetails findById(long id);
+    Optional<SeriesDetails> findById(long id);
 }

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/seriesshelf/series")
@@ -27,10 +26,7 @@ public class SeriesController {
 
     @GetMapping("/{id}")
     public ResponseEntity<SeriesDetails> getById(@PathVariable long id) {
-        return Optional
-                .ofNullable(queryHandler.findById(id))
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        return queryHandler.findById(id).isPresent() ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
     @PostMapping
@@ -42,9 +38,6 @@ public class SeriesController {
 
     @PutMapping("/{id}")
     public ResponseEntity<SeriesDetails> update(long id, final SeriesRegistration seriesRegistration) {
-        return Optional
-                .ofNullable(commandHandler.update(id, seriesRegistration))
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        return commandHandler.update(id, seriesRegistration).isPresent() ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 }

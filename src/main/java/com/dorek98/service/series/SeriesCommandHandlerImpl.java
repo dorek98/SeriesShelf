@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -25,16 +26,16 @@ public class SeriesCommandHandlerImpl implements SeriesCommandHandler {
     }
 
     @Override
-    public SeriesDetails update(long id, SeriesRegistration series) {
+    public Optional<SeriesDetails> update(long id, SeriesRegistration series) {
         try {
             Series oldSeries = seriesRepository.getOne(id);
             oldSeries.setNumberOfSeasons(series.getNumberOfSeasons());
             oldSeries.setPlatform(series.getPlatform());
             oldSeries.setTitle(series.getTitle());
             oldSeries.setYearOfPremiere(series.getYearOfPremiere());
-            return seriesMapper.createSeriesDetails(seriesRepository.save(oldSeries));
+            return Optional.of(seriesMapper.createSeriesDetails(seriesRepository.save(oldSeries)));
         } catch (EntityNotFoundException ex) {
-            return null;
+            return Optional.empty();
         }
     }
 }

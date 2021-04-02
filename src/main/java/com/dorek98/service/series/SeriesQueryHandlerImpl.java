@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -24,11 +25,11 @@ public class SeriesQueryHandlerImpl implements SeriesQueryHandler {
     }
 
     @Override
-    public SeriesDetails findById(long id) {
+    public Optional<SeriesDetails> findById(long id) {
         try {
-            return seriesMapper.createSeriesDetails(seriesRepository.getOne(id));
+            return Optional.of(seriesMapper.createSeriesDetails(seriesRepository.getOne(id)));
         } catch (EntityNotFoundException ex) {
-            return null;
+            return Optional.empty();
         }
     }
 }

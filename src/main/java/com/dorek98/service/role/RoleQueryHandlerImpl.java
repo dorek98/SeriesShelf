@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -24,20 +25,20 @@ public class RoleQueryHandlerImpl implements RoleQueryHandler {
     }
 
     @Override
-    public RoleDetails findById(long id) {
+    public Optional<RoleDetails> findById(long id) {
         try {
-            return roleMapper.createRoleDetails(roleRepository.getOne(id));
+            return Optional.of(roleMapper.createRoleDetails(roleRepository.getOne(id)));
         } catch (EntityNotFoundException ex) {
-            return null;
+            return Optional.empty();
         }
     }
 
     @Override
-    public RoleDetails findByName(String name) {
+    public Optional<RoleDetails> findByName(String name) {
         try {
-            return roleMapper.createRoleDetails(roleRepository.findByName(name));
+            return Optional.of(roleMapper.createRoleDetails(roleRepository.findByName(name)));
         } catch (EntityNotFoundException ex) {
-            return null;
+            return Optional.empty();
         }
     }
 }

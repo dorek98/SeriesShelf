@@ -4,11 +4,13 @@ import com.dorek98.dto.RoleDetails;
 import com.dorek98.dto.RoleRegistration;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 
 @Service
 public interface RoleCommandHandler {
 
     void save(RoleRegistration role);
 
-    RoleDetails updateRoleName(long id, String roleName);
+    Optional<RoleDetails> updateRoleName(long id, String roleName);
 }
