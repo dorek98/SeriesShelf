@@ -43,7 +43,7 @@ public class ActorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ActorDetails> update(@PathVariable long id, final ActorRegistration actorRegistration) {
+    public ResponseEntity<ActorDetails> update(@PathVariable long id, final @Valid ActorRegistration actorRegistration) {
         return commandHandler.update(id, actorRegistration).isPresent() ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 }
