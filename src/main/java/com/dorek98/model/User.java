@@ -2,6 +2,7 @@ package com.dorek98.model;
 
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,6 +18,7 @@ import java.util.Collections;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 public class User implements UserDetails {
 
     @Id
@@ -32,8 +34,6 @@ public class User implements UserDetails {
         this.userRole = userRole;
     }
 
-    public User() {
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

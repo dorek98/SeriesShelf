@@ -1,13 +1,11 @@
 package com.dorek98.service.role;
 
-import com.dorek98.dto.RoleDetails;
-import com.dorek98.dto.RoleRegistration;
-import org.springframework.stereotype.Service;
+import com.dorek98.dto.role.RoleDetails;
+import com.dorek98.dto.role.RoleRegistration;
 
 import java.util.Optional;
 
 
-@Service
 public interface RoleCommandHandler {
 
     void save(RoleRegistration role);

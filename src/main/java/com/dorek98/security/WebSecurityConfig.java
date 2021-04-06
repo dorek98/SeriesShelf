@@ -1,6 +1,7 @@
 package com.dorek98.security;
 
 
+import com.dorek98.service.user.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/api/seriesshelf/**").authenticated()
+                .antMatchers("/api/series-shelf/**").authenticated()
                 .and().csrf().disable()
                 .formLogin().permitAll();
     }

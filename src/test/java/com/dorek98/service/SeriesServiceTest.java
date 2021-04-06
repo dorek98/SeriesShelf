@@ -1,16 +1,10 @@
 package com.dorek98.service;
 
-import com.dorek98.dto.ActorDetails;
-import com.dorek98.dto.ActorRegistration;
-import com.dorek98.dto.SeriesDetails;
-import com.dorek98.dto.SeriesRegistration;
-import com.dorek98.model.Actor;
+import com.dorek98.dto.series.SeriesDetails;
+import com.dorek98.dto.series.SeriesRegistration;
 import com.dorek98.model.Platform;
 import com.dorek98.model.Series;
-import com.dorek98.repository.ActorRepository;
 import com.dorek98.repository.SeriesRepository;
-import com.dorek98.service.actor.ActorCommandHandlerImpl;
-import com.dorek98.service.actor.ActorQueryHandlerImpl;
 import com.dorek98.service.series.SeriesCommandHandlerImpl;
 import com.dorek98.service.series.SeriesQueryHandlerImpl;
 import org.junit.Assert;

@@ -1,6 +1,6 @@
 package com.dorek98.service;
 
-import com.dorek98.dto.RoleDetails;
+import com.dorek98.dto.role.RoleDetails;
 import com.dorek98.model.Actor;
 import com.dorek98.model.Platform;
 import com.dorek98.model.Role;

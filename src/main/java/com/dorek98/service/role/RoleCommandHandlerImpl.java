@@ -1,7 +1,7 @@
 package com.dorek98.service.role;
 
-import com.dorek98.dto.RoleDetails;
-import com.dorek98.dto.RoleRegistration;
+import com.dorek98.dto.role.RoleDetails;
+import com.dorek98.dto.role.RoleRegistration;
 import com.dorek98.mapper.RoleMapper;
 import com.dorek98.model.Role;
 import com.dorek98.repository.RoleRepository;
@@ -22,7 +22,7 @@ public class RoleCommandHandlerImpl implements RoleCommandHandler {
 
     @Override
     public void save(RoleRegistration role) {
-        roleRepository.save(roleMapper.createRole(role));
+        roleRepository.save(roleMapper.toRole(role));
     }
 
     @Override
@@ -30,7 +30,7 @@ public class RoleCommandHandlerImpl implements RoleCommandHandler {
         try {
             Role role = roleRepository.getOne(id);
             role.setRoleName(roleName);
-            return Optional.of(roleMapper.createRoleDetails(roleRepository.save(role)));
+            return Optional.of(roleMapper.toRoleDetails(roleRepository.save(role)));
         } catch (EntityNotFoundException ex) {
             return Optional.empty();
         }

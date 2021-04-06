@@ -2,17 +2,19 @@ package com.dorek98.model;
 
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Getter
+@Setter
 @Entity
-@Table(name = "role")
+@NoArgsConstructor
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long role_id;
-
     private String roleName;
 
     @ManyToOne
@@ -23,26 +25,12 @@ public class Role {
     @JoinColumn(name = "actor_id")
     private Actor actor;
 
-    public Role() {
-    }
-
     public Role(String roleName, Series series, Actor actor) {
         this.roleName = roleName;
         this.series = series;
         this.actor = actor;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
-    public void setSeries(Series series) {
-        this.series = series;
-    }
-
-    public void setActor(Actor actor) {
-        this.actor = actor;
-    }
 
     @Override
     public String toString() {

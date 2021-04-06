@@ -1,7 +1,7 @@
 package com.dorek98.service.actor;
 
-import com.dorek98.dto.ActorDetails;
-import com.dorek98.dto.ActorRegistration;
+import com.dorek98.dto.actor.ActorDetails;
+import com.dorek98.dto.actor.ActorRegistration;
 import com.dorek98.mapper.ActorMapper;
 import com.dorek98.model.Actor;
 import com.dorek98.repository.ActorRepository;
@@ -22,7 +22,7 @@ public class ActorCommandHandlerImpl implements ActorCommandHandler {
 
     @Override
     public void save(ActorRegistration actor) {
-        actorRepository.save(actorMapper.createActor(actor));
+        actorRepository.save(actorMapper.toActor(actor));
     }
 
     @Override
@@ -32,7 +32,7 @@ public class ActorCommandHandlerImpl implements ActorCommandHandler {
             oldActor.setFirstName(actor.getFirstName());
             oldActor.setLastName(actor.getLastName());
             oldActor.setAge(actor.getAge());
-            return Optional.of(actorMapper.createActorDetails(actorRepository.save(oldActor)));
+            return Optional.of(actorMapper.toActorDetails(actorRepository.save(oldActor)));
         } catch (EntityNotFoundException ex) {
             return Optional.empty();
         }

@@ -1,5 +1,6 @@
-package com.dorek98.model;
+package com.dorek98;
 
+import com.dorek98.model.*;
 import com.dorek98.repository.ActorRepository;
 import com.dorek98.repository.RoleRepository;
 import com.dorek98.repository.SeriesRepository;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Component
-public class PrepareData implements ApplicationRunner {
+public class PreparedData implements ApplicationRunner {
     private final ActorRepository actorRepository;
     private final SeriesRepository seriesRepository;
     private final RoleRepository roleRepository;
@@ -34,7 +35,7 @@ public class PrepareData implements ApplicationRunner {
         actors.add(new Actor("Ron", "Bruno", 17));
 
         List<Series> series = new ArrayList<>();
-        series.add(new Series("GoT",6,Platform.HBO,2010));
+        series.add(new Series("GoT",6, Platform.HBO,2010));
         series.add(new Series("Peaks",3,Platform.Netflix,2017));
         series.add(new Series("Dark",2,Platform.Netflix,2019));
 

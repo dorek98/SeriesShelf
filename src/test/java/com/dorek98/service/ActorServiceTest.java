@@ -1,7 +1,7 @@
 package com.dorek98.service;
 
-import com.dorek98.dto.ActorDetails;
-import com.dorek98.dto.ActorRegistration;
+import com.dorek98.dto.actor.ActorDetails;
+import com.dorek98.dto.actor.ActorRegistration;
 import com.dorek98.model.Actor;
 import com.dorek98.repository.ActorRepository;
 import com.dorek98.service.actor.ActorCommandHandlerImpl;

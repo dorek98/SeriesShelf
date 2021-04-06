@@ -1,7 +1,7 @@
 package com.dorek98.controller;
 
-import com.dorek98.dto.RoleDetails;
-import com.dorek98.dto.RoleRegistration;
+import com.dorek98.dto.role.RoleDetails;
+import com.dorek98.dto.role.RoleRegistration;
 import com.dorek98.service.role.RoleCommandHandlerImpl;
 import com.dorek98.service.role.RoleQueryHandlerImpl;
 import lombok.AllArgsConstructor;
@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/seriesshelf/roles")
+@RequestMapping("/api/series-shelf/roles")
 @AllArgsConstructor
 public class RoleController {
 

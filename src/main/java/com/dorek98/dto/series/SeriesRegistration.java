@@ -1,4 +1,4 @@
-package com.dorek98.dto;
+package com.dorek98.dto.series;
 
 import com.dorek98.model.Platform;
 import lombok.Value;

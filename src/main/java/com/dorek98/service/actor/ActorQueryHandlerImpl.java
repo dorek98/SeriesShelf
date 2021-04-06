@@ -1,6 +1,6 @@
 package com.dorek98.service.actor;
 
-import com.dorek98.dto.ActorDetails;
+import com.dorek98.dto.actor.ActorDetails;
 import com.dorek98.mapper.ActorMapper;
 import com.dorek98.repository.ActorRepository;
 import lombok.AllArgsConstructor;
@@ -21,13 +21,13 @@ public class ActorQueryHandlerImpl implements ActorQueryHandler {
 
     @Override
     public List<ActorDetails> findAll() {
-        return actorMapper.listToDetails(actorRepository.findAll());
+        return actorMapper.toDetailsList(actorRepository.findAll());
     }
 
     @Override
     public Optional<ActorDetails> findById(long id) {
         try {
-            return Optional.of(actorMapper.createActorDetails(actorRepository.getOne(id)));
+            return Optional.of(actorMapper.toActorDetails(actorRepository.getOne(id)));
         } catch (EntityNotFoundException ex) {
             return Optional.empty();
         }
@@ -35,6 +35,6 @@ public class ActorQueryHandlerImpl implements ActorQueryHandler {
 
     @Override
     public List<ActorDetails> findAdults() {
-        return actorMapper.listToDetails(actorRepository.findAdultActors());
+        return actorMapper.toDetailsList(actorRepository.findAdultActors());
     }
 }

@@ -1,7 +1,7 @@
 package com.dorek98.controller;
 
-import com.dorek98.dto.SeriesDetails;
-import com.dorek98.dto.SeriesRegistration;
+import com.dorek98.dto.series.SeriesDetails;
+import com.dorek98.dto.series.SeriesRegistration;
 import com.dorek98.service.series.SeriesCommandHandlerImpl;
 import com.dorek98.service.series.SeriesQueryHandlerImpl;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/seriesshelf/series")
+@RequestMapping("/api/series-shelf/series")
 @AllArgsConstructor
 public class SeriesController {
     private final SeriesCommandHandlerImpl commandHandler;

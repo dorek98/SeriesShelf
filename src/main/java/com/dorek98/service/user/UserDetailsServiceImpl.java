@@ -1,4 +1,4 @@
-package com.dorek98.security;
+package com.dorek98.service.user;
 
 import com.dorek98.repository.UserRepository;
 import lombok.AllArgsConstructor;

@@ -1,5 +1,6 @@
-package com.dorek98.dto;
+package com.dorek98.dto.actor;
 
+import com.dorek98.dto.role.RoleDetails;
 import lombok.Value;
 
 import java.util.List;
@@ -10,6 +11,6 @@ public class ActorDetails {
     long id;
     String firstName;
     String lastName;
-    int Age;
+    int age;
     List<RoleDetails> roles;
 }

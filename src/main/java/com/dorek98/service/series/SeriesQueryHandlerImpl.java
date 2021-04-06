@@ -1,6 +1,6 @@
 package com.dorek98.service.series;
 
-import com.dorek98.dto.SeriesDetails;
+import com.dorek98.dto.series.SeriesDetails;
 import com.dorek98.mapper.SeriesMapper;
 import com.dorek98.repository.SeriesRepository;
 import lombok.AllArgsConstructor;
@@ -21,13 +21,13 @@ public class SeriesQueryHandlerImpl implements SeriesQueryHandler {
 
     @Override
     public List<SeriesDetails> findAll() {
-        return seriesMapper.listToDetails(seriesRepository.findAll());
+        return seriesMapper.toDetailsList(seriesRepository.findAll());
     }
 
     @Override
     public Optional<SeriesDetails> findById(long id) {
         try {
-            return Optional.of(seriesMapper.createSeriesDetails(seriesRepository.getOne(id)));
+            return Optional.of(seriesMapper.toSeriesDetails(seriesRepository.getOne(id)));
         } catch (EntityNotFoundException ex) {
             return Optional.empty();
         }

@@ -1,6 +1,6 @@
 package com.dorek98.service.role;
 
-import com.dorek98.dto.RoleDetails;
+import com.dorek98.dto.role.RoleDetails;
 import com.dorek98.mapper.RoleMapper;
 import com.dorek98.repository.RoleRepository;
 import lombok.AllArgsConstructor;
@@ -21,13 +21,13 @@ public class RoleQueryHandlerImpl implements RoleQueryHandler {
 
     @Override
     public List<RoleDetails> findAll() {
-        return roleMapper.listToDetails(roleRepository.findAll());
+        return roleMapper.toDetailsList(roleRepository.findAll());
     }
 
     @Override
     public Optional<RoleDetails> findById(long id) {
         try {
-            return Optional.of(roleMapper.createRoleDetails(roleRepository.getOne(id)));
+            return Optional.of(roleMapper.toRoleDetails(roleRepository.getOne(id)));
         } catch (EntityNotFoundException ex) {
             return Optional.empty();
         }
@@ -36,7 +36,7 @@ public class RoleQueryHandlerImpl implements RoleQueryHandler {
     @Override
     public Optional<RoleDetails> findByName(String name) {
         try {
-            return Optional.of(roleMapper.createRoleDetails(roleRepository.findByName(name)));
+            return Optional.of(roleMapper.toRoleDetails(roleRepository.findByName(name)));
         } catch (EntityNotFoundException ex) {
             return Optional.empty();
         }

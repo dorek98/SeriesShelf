@@ -1,4 +1,4 @@
-package com.dorek98.dto;
+package com.dorek98.dto.actor;
 
 import lombok.Value;
 

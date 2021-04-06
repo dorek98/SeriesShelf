@@ -1,13 +1,16 @@
 package com.dorek98.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Getter
+@Setter
 @Entity
-@Table(name = "series")
+@NoArgsConstructor
 public class Series {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,9 +26,6 @@ public class Series {
     private List<Role> roles;
 
 
-    public Series() {
-    }
-
     public Series(String title, int numberOfSeasons, Platform platform, int yearOfPremiere) {
         this.title = title;
         this.numberOfSeasons = numberOfSeasons;
@@ -33,29 +33,6 @@ public class Series {
         this.yearOfPremiere = yearOfPremiere;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
-
-    public void setNumberOfSeasons(int numberOfSeasons) {
-        this.numberOfSeasons = numberOfSeasons;
-    }
-
-
-    public void setPlatform(Platform platform) {
-        this.platform = platform;
-    }
-
-
-    public void setYearOfPremiere(int yearOfPremiere) {
-        this.yearOfPremiere = yearOfPremiere;
-    }
 
     @Override
     public String toString() {
