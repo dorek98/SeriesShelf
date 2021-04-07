@@ -38,8 +38,7 @@ public class RoleController {
 
     @PostMapping
     public ResponseEntity<HttpStatus> create(final @Valid RoleRegistration roleRegistration) {
-        commandHandler.save(roleRegistration);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return commandHandler.save(roleRegistration);
     }
 
     @PutMapping("/{id}")

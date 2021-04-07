@@ -1,8 +1,12 @@
 package com.dorek98.dto.role;
 
-import lombok.Value;
+import com.dorek98.model.Actor;
+import com.dorek98.model.Series;
+import lombok.Getter;
+import lombok.Setter;
 
-@Value
+@Getter
+@Setter
 public class RoleDetails {
 
     long id;
@@ -10,4 +14,10 @@ public class RoleDetails {
     long seriesId;
     long actorId;
 
+    public RoleDetails(long id, String roleName, Series series, Actor actor) {
+        this.id = id;
+        this.roleName = roleName;
+        this.seriesId = series.getSeries_id();
+        this.actorId = actor.getActor_id();
+    }
 }

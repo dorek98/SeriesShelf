@@ -21,7 +21,7 @@ public class RoleQueryHandlerImpl implements RoleQueryHandler {
 
     @Override
     public List<RoleDetails> findAll() {
-        return roleMapper.toDetailsList(roleRepository.findAll());
+        return roleMapper.toRoleDetailsList(roleRepository.findAll());
     }
 
     @Override

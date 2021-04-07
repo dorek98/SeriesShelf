@@ -2,7 +2,6 @@ package com.dorek98.repository;
 
 import com.dorek98.model.Actor;
 import lombok.AllArgsConstructor;
-import lombok.Value;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

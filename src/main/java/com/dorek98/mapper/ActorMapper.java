@@ -3,31 +3,19 @@ package com.dorek98.mapper;
 import com.dorek98.dto.actor.ActorDetails;
 import com.dorek98.dto.actor.ActorRegistration;
 import com.dorek98.model.Actor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Component
-public class ActorMapper {
+@Mapper(componentModel = "spring")
+public interface ActorMapper {
 
-    @Autowired
-    private RoleMapper roleMapper;
+    Actor toActor(final ActorRegistration actor);
 
-    public ActorDetails toActorDetails(Actor actor) {
-        return new ActorDetails(actor.getActor_id(), actor.getFirstName(), actor.getLastName(), actor.getAge(), roleMapper.toDetailsList(actor.getRoles()));
-    }
+    @Mapping(target = "id", source = "actor_id")
+    ActorDetails toActorDetails(final Actor actor);
 
-    public Actor toActor(ActorRegistration actor) {
-        return new Actor(actor.getFirstName(), actor.getLastName(), actor.getAge());
-    }
+    List<ActorDetails> toActorDetailsList(final List<Actor> actorList);
 
-    public List<ActorDetails> toDetailsList(List<Actor> actors) {
-        List<ActorDetails> actorsDetails = new ArrayList<>();
-        for (Actor a : actors) {
-            actorsDetails.add(toActorDetails(a));
-        }
-        return actorsDetails;
-    }
 }

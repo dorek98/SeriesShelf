@@ -16,12 +16,12 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class SeriesQueryHandlerImpl implements SeriesQueryHandler {
 
-    private final SeriesMapper seriesMapper;
     private final SeriesRepository seriesRepository;
+    private final SeriesMapper seriesMapper;
 
     @Override
     public List<SeriesDetails> findAll() {
-        return seriesMapper.toDetailsList(seriesRepository.findAll());
+        return seriesMapper.toSeriesDetailsList(seriesRepository.findAll());
     }
 
     @Override

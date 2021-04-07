@@ -17,8 +17,8 @@ import java.util.Optional;
 @Transactional
 public class SeriesCommandHandlerImpl implements SeriesCommandHandler {
 
-    private final SeriesMapper seriesMapper;
     private final SeriesRepository seriesRepository;
+    private final SeriesMapper seriesMapper;
 
     @Override
     public void save(SeriesRegistration series) {
