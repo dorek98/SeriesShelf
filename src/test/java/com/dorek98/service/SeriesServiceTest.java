@@ -11,6 +11,8 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
 
@@ -48,14 +50,14 @@ public class SeriesServiceTest {
         long idSeries = sampleSeries.getSeries_id();
 
         //when: We try to update series
-        Optional<SeriesDetails> updatedSeries = seriesCommandHandler.update(idSeries, new SeriesRegistration("Test1", 2, Platform.HBO, 2022));
+        ResponseEntity<SeriesDetails> updatedSeries = seriesCommandHandler.update(idSeries, new SeriesRegistration("Test1", 2, Platform.HBO, 2022));
 
         //then: Series should be updated
-        Assert.assertTrue(updatedSeries.isPresent());
-        Assert.assertEquals(idSeries, updatedSeries.get().getId());
-        Assert.assertEquals("Test1", updatedSeries.get().getTitle());
-        Assert.assertEquals(2, updatedSeries.get().getNumberOfSeasons());
-        Assert.assertEquals(2022, updatedSeries.get().getYearOfPremiere());
+        Assert.assertNotNull(updatedSeries.getBody());
+        Assert.assertEquals(idSeries, updatedSeries.getBody().getId());
+        Assert.assertEquals("Test1", updatedSeries.getBody().getTitle());
+        Assert.assertEquals(2, updatedSeries.getBody().getNumberOfSeasons());
+        Assert.assertEquals(2022, updatedSeries.getBody().getYearOfPremiere());
 
         //clean
         seriesRepository.deleteById(idSeries);
@@ -67,9 +69,10 @@ public class SeriesServiceTest {
         long notExistingId = 1000;
 
         //when: We try to find series with not existing id
-        Optional<SeriesDetails> series = seriesQueryHandler.findById(notExistingId);
+        ResponseEntity<SeriesDetails> series = seriesQueryHandler.findById(notExistingId);
 
         //then: Series should be null
-        Assert.assertTrue(series.isEmpty());
+        Assert.assertNull(series.getBody());
+        Assert.assertEquals(series.getStatusCode(), HttpStatus.NOT_FOUND);
     }
 }

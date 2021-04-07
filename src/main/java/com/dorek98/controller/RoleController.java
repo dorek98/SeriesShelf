@@ -28,12 +28,12 @@ public class RoleController {
 
     @GetMapping("/{id}")
     public ResponseEntity<RoleDetails> getById(@PathVariable long id) {
-        return queryHandler.findById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return queryHandler.findById(id);
     }
 
     @GetMapping("/name")
     public ResponseEntity<RoleDetails> getByName(@NotBlank String name) {
-        return queryHandler.findByName(name).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return queryHandler.findByName(name);
     }
 
     @PostMapping
@@ -43,11 +43,11 @@ public class RoleController {
 
     @PutMapping("/{id}")
     public ResponseEntity<RoleDetails> updateRoleName(long id, String roleName) {
-        return commandHandler.updateRoleName(id, roleName).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return commandHandler.updateRoleName(id, roleName);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable long id) {
-        return commandHandler.delete(id) ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return commandHandler.delete(id);
     }
 }

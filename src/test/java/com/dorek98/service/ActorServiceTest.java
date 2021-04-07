@@ -10,6 +10,8 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,14 +50,14 @@ public class ActorServiceTest {
         long idActor = sampleActor.getActor_id();
 
         //when: We try to update actor
-        Optional<ActorDetails> updatedActor = actorCommandHandler.update(idActor, new ActorRegistration("Test2", "Test2", 15));
+        ResponseEntity<ActorDetails> updatedActor = actorCommandHandler.update(idActor, new ActorRegistration("Test2", "Test2", 15));
 
         //then: Actor should be updated
-        Assert.assertTrue(updatedActor.isPresent());
-        Assert.assertEquals(idActor, updatedActor.get().getId());
-        Assert.assertEquals("Test2", updatedActor.get().getFirstName());
-        Assert.assertEquals("Test2", updatedActor.get().getLastName());
-        Assert.assertEquals(15, updatedActor.get().getAge());
+        Assert.assertTrue(updatedActor.getBody() != null);
+        Assert.assertEquals(idActor, updatedActor.getBody().getId());
+        Assert.assertEquals("Test2", updatedActor.getBody().getFirstName());
+        Assert.assertEquals("Test2", updatedActor.getBody().getLastName());
+        Assert.assertEquals(15, updatedActor.getBody().getAge());
 
         //clean
         actorRepository.deleteById(idActor);
@@ -67,11 +69,11 @@ public class ActorServiceTest {
         long notExistingId = 1000;
 
         //when: We try to find actor with not existing id
-        Optional<ActorDetails> actor = actorQueryHandler.findById(notExistingId);
+        ResponseEntity<ActorDetails> actor = actorQueryHandler.findById(notExistingId);
 
         //then: Actor should be null
-        System.out.println(actor);
-        Assert.assertTrue(actor.isEmpty());
+        Assert.assertNull(actor.getBody());
+        Assert.assertEquals(actor.getStatusCode(), HttpStatus.NOT_FOUND);
     }
 
     @Test

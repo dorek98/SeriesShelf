@@ -14,6 +14,8 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
 
@@ -69,14 +71,14 @@ public class RoleServiceTest {
         long idRole = sampleRole.getRole_id();
 
         //when: We try to update role name
-        Optional<RoleDetails> updatedRole = roleCommandHandler.updateRoleName(idRole, "newTest");
+        ResponseEntity<RoleDetails> updatedRole = roleCommandHandler.updateRoleName(idRole, "newTest");
 
         //then: Actor should be updated
-        Assert.assertTrue(updatedRole.isPresent());
-        Assert.assertEquals(idRole, updatedRole.get().getId());
-        Assert.assertEquals("newTest", updatedRole.get().getRoleName());
-        Assert.assertEquals(idActor, updatedRole.get().getActorId());
-        Assert.assertEquals(idSeries, updatedRole.get().getSeriesId());
+        Assert.assertNotNull(updatedRole.getBody());
+        Assert.assertEquals(idRole, updatedRole.getBody().getRole_id());
+        Assert.assertEquals("newTest", updatedRole.getBody().getRoleName());
+        Assert.assertEquals(idActor, updatedRole.getBody().getActorId());
+        Assert.assertEquals(idSeries, updatedRole.getBody().getSeriesId());
 
         //clean
         roleRepository.deleteById(idRole);
@@ -90,9 +92,10 @@ public class RoleServiceTest {
         long notExistingId = 1000;
 
         //when: We try to find actor with not existing id
-        Optional<RoleDetails> role = roleQueryHandler.findById(notExistingId);
+        ResponseEntity<RoleDetails> role = roleQueryHandler.findById(notExistingId);
 
         //then: Actor should be null
-        Assert.assertTrue(role.isEmpty());
+        Assert.assertNull(role.getBody());
+        Assert.assertEquals(role.getStatusCode(), HttpStatus.NOT_FOUND);
     }
 }

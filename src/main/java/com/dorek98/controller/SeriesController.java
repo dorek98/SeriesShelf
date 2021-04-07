@@ -26,18 +26,17 @@ public class SeriesController {
 
     @GetMapping("/{id}")
     public ResponseEntity<SeriesDetails> getById(@PathVariable long id) {
-        return queryHandler.findById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return queryHandler.findById(id);
     }
 
     @PostMapping
     public ResponseEntity<HttpStatus> create(final @Valid SeriesRegistration seriesRegistration) {
         commandHandler.save(seriesRegistration);
         return new ResponseEntity<>(HttpStatus.CREATED);
-
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<SeriesDetails> update(long id, final @Valid SeriesRegistration seriesRegistration) {
-        return commandHandler.update(id, seriesRegistration).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return commandHandler.update(id, seriesRegistration);
     }
 }

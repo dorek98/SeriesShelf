@@ -5,12 +5,10 @@ import com.dorek98.dto.role.RoleRegistration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Optional;
-
 
 public interface RoleCommandHandler {
 
     ResponseEntity<HttpStatus> save(RoleRegistration role);
 
-    Optional<RoleDetails> updateRoleName(long id, String roleName);
+    ResponseEntity<RoleDetails> updateRoleName(long id, String roleName);
 }

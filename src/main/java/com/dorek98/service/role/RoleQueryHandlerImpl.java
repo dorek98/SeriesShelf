@@ -2,8 +2,10 @@ package com.dorek98.service.role;
 
 import com.dorek98.dto.role.RoleDetails;
 import com.dorek98.mapper.RoleMapper;
+import com.dorek98.model.Role;
 import com.dorek98.repository.RoleRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,24 +23,29 @@ public class RoleQueryHandlerImpl implements RoleQueryHandler {
 
     @Override
     public List<RoleDetails> findAll() {
-        return roleMapper.toRoleDetailsList(roleRepository.findAll());
+        List<Role> roleList = roleRepository.findAll();
+        return roleMapper.toRoleDetailsList(roleList);
     }
 
     @Override
-    public Optional<RoleDetails> findById(long id) {
+    public ResponseEntity<RoleDetails> findById(long id) {
         try {
-            return Optional.of(roleMapper.toRoleDetails(roleRepository.getOne(id)));
+            Role role = roleRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+            RoleDetails roleDetails = roleMapper.toRoleDetails(role);
+            return ResponseEntity.ok(roleDetails);
         } catch (EntityNotFoundException ex) {
-            return Optional.empty();
+            return ResponseEntity.notFound().build();
         }
     }
 
     @Override
-    public Optional<RoleDetails> findByName(String name) {
+    public ResponseEntity<RoleDetails> findByName(String name) {
         try {
-            return Optional.of(roleMapper.toRoleDetails(roleRepository.findByName(name)));
+            Role role = roleRepository.findByRoleName(name).orElseThrow(EntityNotFoundException::new);
+            RoleDetails roleDetails = roleMapper.toRoleDetails(role);
+            return ResponseEntity.ok(roleDetails);
         } catch (EntityNotFoundException ex) {
-            return Optional.empty();
+            return ResponseEntity.notFound().build();
         }
     }
 }

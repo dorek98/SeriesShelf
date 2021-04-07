@@ -6,11 +6,11 @@ import com.dorek98.mapper.ActorMapper;
 import com.dorek98.model.Actor;
 import com.dorek98.repository.ActorRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -21,20 +21,23 @@ public class ActorCommandHandlerImpl implements ActorCommandHandler {
     private final ActorMapper actorMapper;
 
     @Override
-    public void save(ActorRegistration actor) {
-        actorRepository.save(actorMapper.toActor(actor));
+    public void save(ActorRegistration actorDTO) {
+        Actor actor = actorMapper.toActor(actorDTO);
+        actorRepository.save(actor);
     }
 
     @Override
-    public Optional<ActorDetails> update(long id, ActorRegistration actor) {
+    public ResponseEntity<ActorDetails> update(long id, ActorRegistration actor) {
         try {
-            Actor oldActor = actorRepository.getOne(id);
+            Actor oldActor = actorRepository.findById(id).orElseThrow(EntityNotFoundException::new);
             oldActor.setFirstName(actor.getFirstName());
             oldActor.setLastName(actor.getLastName());
             oldActor.setAge(actor.getAge());
-            return Optional.of(actorMapper.toActorDetails(actorRepository.save(oldActor)));
+            Actor newActor = actorRepository.save(oldActor);
+            ActorDetails actorDetails = actorMapper.toActorDetails(newActor);
+            return ResponseEntity.ok(actorDetails);
         } catch (EntityNotFoundException ex) {
-            return Optional.empty();
+            return ResponseEntity.notFound().build();
         }
     }
 }

@@ -6,11 +6,11 @@ import com.dorek98.mapper.SeriesMapper;
 import com.dorek98.model.Series;
 import com.dorek98.repository.SeriesRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -21,21 +21,24 @@ public class SeriesCommandHandlerImpl implements SeriesCommandHandler {
     private final SeriesMapper seriesMapper;
 
     @Override
-    public void save(SeriesRegistration series) {
-        seriesRepository.save(seriesMapper.toSeries(series));
+    public void save(SeriesRegistration seriesDTO) {
+        Series series = seriesMapper.toSeries(seriesDTO);
+        seriesRepository.save(series);
     }
 
     @Override
-    public Optional<SeriesDetails> update(long id, SeriesRegistration series) {
+    public ResponseEntity<SeriesDetails> update(long id, SeriesRegistration series) {
         try {
-            Series oldSeries = seriesRepository.getOne(id);
+            Series oldSeries = seriesRepository.findById(id).orElseThrow(EntityNotFoundException::new);
             oldSeries.setNumberOfSeasons(series.getNumberOfSeasons());
             oldSeries.setPlatform(series.getPlatform());
             oldSeries.setTitle(series.getTitle());
             oldSeries.setYearOfPremiere(series.getYearOfPremiere());
-            return Optional.of(seriesMapper.toSeriesDetails(seriesRepository.save(oldSeries)));
+            Series newSeries = seriesRepository.save(oldSeries);
+            SeriesDetails seriesDetails = seriesMapper.toSeriesDetails(newSeries);
+            return ResponseEntity.ok(seriesDetails);
         } catch (EntityNotFoundException ex) {
-            return Optional.empty();
+            return ResponseEntity.notFound().build();
         }
     }
 }

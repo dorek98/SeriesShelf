@@ -32,35 +32,37 @@ public class RoleCommandHandlerImpl implements RoleCommandHandler {
     @Override
     public ResponseEntity<HttpStatus> save(RoleRegistration roleDTO) {
         try {
-            Optional<Actor> actor = actorRepository.findById(roleDTO.getActorId());
-            Optional<Series> series = seriesRepository.findById(roleDTO.getSeriesId());
+            Actor actor = actorRepository.findById(roleDTO.getActorId()).orElseThrow(EntityNotFoundException::new);
+            Series series = seriesRepository.findById(roleDTO.getSeriesId()).orElseThrow(EntityNotFoundException::new);
             Role role = roleMapper.toRole(roleDTO);
-            role.setActor(actor.get());
-            role.setSeries(series.get());
+            role.setActor(actor);
+            role.setSeries(series);
             roleRepository.save(role);
             return new ResponseEntity<>(HttpStatus.CREATED);
-        } catch (NoSuchElementException ex){
+        } catch (NoSuchElementException ex) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
     @Override
-    public Optional<RoleDetails> updateRoleName(long id, String roleName) {
+    public ResponseEntity<RoleDetails> updateRoleName(long id, String roleName) {
         try {
-            Role role = roleRepository.getOne(id);
+            Role role = roleRepository.findById(id).orElseThrow(EntityNotFoundException::new);
             role.setRoleName(roleName);
-            return Optional.of(roleMapper.toRoleDetails(roleRepository.save(role)));
+            Role newRole = roleRepository.save(role);
+            RoleDetails roleDetails = roleMapper.toRoleDetails(newRole);
+            return ResponseEntity.ok(roleDetails);
         } catch (EntityNotFoundException ex) {
-            return Optional.empty();
+            return ResponseEntity.notFound().build();
         }
     }
 
-    public boolean delete(long id) {
+    public ResponseEntity<HttpStatus> delete(long id) {
         try {
             roleRepository.deleteById(id);
-            return true;
+            return ResponseEntity.ok().build();
         } catch (EntityNotFoundException ex) {
-            return false;
+            return ResponseEntity.notFound().build();
         }
     }
 }
