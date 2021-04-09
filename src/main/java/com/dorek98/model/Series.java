@@ -14,7 +14,7 @@ import java.util.List;
 public class Series {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long series_id;
+    private long seriesId;
     private String title;
     private int numberOfSeasons;
     @Enumerated(EnumType.STRING)
@@ -37,7 +37,7 @@ public class Series {
     @Override
     public String toString() {
         return "Series{" +
-                "series_id=" + series_id +
+                "seriesId=" + seriesId +
                 ", title='" + title + '\'' +
                 ", numberOfSeasons=" + numberOfSeasons +
                 ", platform=" + platform +

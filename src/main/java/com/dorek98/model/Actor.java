@@ -14,7 +14,7 @@ import java.util.List;
 public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long actor_id;
+    private long actorId;
     private String firstName;
     private String lastName;
     private int age;
@@ -31,7 +31,7 @@ public class Actor {
     @Override
     public String toString() {
         return "Actor{" +
-                "actor_id=" + actor_id +
+                "actorId=" + actorId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +

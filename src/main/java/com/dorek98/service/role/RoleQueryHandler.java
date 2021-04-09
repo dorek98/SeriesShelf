@@ -11,6 +11,6 @@ public interface RoleQueryHandler {
 
     ResponseEntity<RoleDetails> findById(long id);
 
-    ResponseEntity<RoleDetails> findByName(String name);
+    ResponseEntity<List<RoleDetails>> findByName(String name);
 
 }

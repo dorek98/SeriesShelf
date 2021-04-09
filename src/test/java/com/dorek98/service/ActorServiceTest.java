@@ -14,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @SpringBootTest
@@ -34,7 +33,7 @@ public class ActorServiceTest {
 
         //when: We try to save actor to database
         actorRepository.save(sampleActor);
-        long idActor = sampleActor.getActor_id();
+        long idActor = sampleActor.getActorId();
         //then: Actor should exist in database
         Assert.assertTrue(actorRepository.existsById(idActor));
 
@@ -47,7 +46,7 @@ public class ActorServiceTest {
         //given: We have sample actor in database
         Actor sampleActor = new Actor("Test", "Test", 25);
         actorRepository.save(sampleActor);
-        long idActor = sampleActor.getActor_id();
+        long idActor = sampleActor.getActorId();
 
         //when: We try to update actor
         ResponseEntity<ActorDetails> updatedActor = actorCommandHandler.update(idActor, new ActorRegistration("Test2", "Test2", 15));
@@ -81,15 +80,15 @@ public class ActorServiceTest {
         //given: We have sample not adult actors saved to database
         Actor sampleActor1 = new Actor("Test1", "Test1", 10);
         actorRepository.save(sampleActor1);
-        long idActor1 = sampleActor1.getActor_id();
+        long idActor1 = sampleActor1.getActorId();
 
         Actor sampleActor2 = new Actor("Test2", "Test2", 13);
         actorRepository.save(sampleActor2);
-        long idActor2 = sampleActor2.getActor_id();
+        long idActor2 = sampleActor2.getActorId();
 
         Actor adultActor = new Actor("Test2", "Test2", 31);
         actorRepository.save(adultActor);
-        long idAdult = adultActor.getActor_id();
+        long idAdult = adultActor.getActorId();
 
         //when: We try to find adult actors
         List<ActorDetails> adultActors = actorQueryHandler.findAdults();

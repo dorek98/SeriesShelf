@@ -17,8 +17,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Optional;
-
 @SpringBootTest
 public class RoleServiceTest {
 
@@ -42,11 +40,11 @@ public class RoleServiceTest {
 
         //when: We try to save role to database
         actorRepository.save(sampleActor);
-        long idActor = sampleActor.getActor_id();
+        long idActor = sampleActor.getActorId();
         seriesRepository.save(sampleSeries);
-        long idSeries = sampleSeries.getSeries_id();
+        long idSeries = sampleSeries.getSeriesId();
         roleRepository.save(sampleRole);
-        long idRole = sampleRole.getRole_id();
+        long idRole = sampleRole.getRoleId();
 
         //then: Role should exist in database
         Assert.assertTrue(roleRepository.existsById(idRole));
@@ -64,18 +62,18 @@ public class RoleServiceTest {
         Series sampleSeries = new Series("TestSeries", 1, Platform.HBO, 2021);
         Role sampleRole = new Role("TestRole", sampleSeries, sampleActor);
         actorRepository.save(sampleActor);
-        long idActor = sampleActor.getActor_id();
+        long idActor = sampleActor.getActorId();
         seriesRepository.save(sampleSeries);
-        long idSeries = sampleSeries.getSeries_id();
+        long idSeries = sampleSeries.getSeriesId();
         roleRepository.save(sampleRole);
-        long idRole = sampleRole.getRole_id();
+        long idRole = sampleRole.getRoleId();
 
         //when: We try to update role name
         ResponseEntity<RoleDetails> updatedRole = roleCommandHandler.updateRoleName(idRole, "newTest");
 
         //then: Actor should be updated
         Assert.assertNotNull(updatedRole.getBody());
-        Assert.assertEquals(idRole, updatedRole.getBody().getRole_id());
+        Assert.assertEquals(idRole, updatedRole.getBody().getId());
         Assert.assertEquals("newTest", updatedRole.getBody().getRoleName());
         Assert.assertEquals(idActor, updatedRole.getBody().getActorId());
         Assert.assertEquals(idSeries, updatedRole.getBody().getSeriesId());

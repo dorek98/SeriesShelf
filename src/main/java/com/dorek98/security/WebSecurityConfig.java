@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/api/series-shelf/**").permitAll()
+                .antMatchers("/api/series-shelf/**").authenticated()
                 .and().csrf().disable()
                 .formLogin().permitAll();
     }

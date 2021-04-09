@@ -14,8 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Optional;
-
 @SpringBootTest
 public class SeriesServiceTest {
 
@@ -33,7 +31,7 @@ public class SeriesServiceTest {
 
         //when: We try to save series to database
         seriesRepository.save(sampleSeries);
-        long idSeries = sampleSeries.getSeries_id();
+        long idSeries = sampleSeries.getSeriesId();
 
         //then: Series should exist in database
         Assert.assertTrue(seriesRepository.existsById(idSeries));
@@ -47,7 +45,7 @@ public class SeriesServiceTest {
         //given: We have sample series in database
         Series sampleSeries = new Series("TestSeries", 1, Platform.HBO, 2021);
         seriesRepository.save(sampleSeries);
-        long idSeries = sampleSeries.getSeries_id();
+        long idSeries = sampleSeries.getSeriesId();
 
         //when: We try to update series
         ResponseEntity<SeriesDetails> updatedSeries = seriesCommandHandler.update(idSeries, new SeriesRegistration("Test1", 2, Platform.HBO, 2022));

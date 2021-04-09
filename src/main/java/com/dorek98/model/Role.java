@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long role_id;
+    private long roleId;
     private String roleName;
 
     @ManyToOne
@@ -35,7 +35,7 @@ public class Role {
     @Override
     public String toString() {
         return "Role{" +
-                "role_id=" + role_id +
+                "roleId=" + roleId +
                 ", roleName='" + roleName + '\'' +
                 ", series=" + series +
                 ", actor=" + actor +

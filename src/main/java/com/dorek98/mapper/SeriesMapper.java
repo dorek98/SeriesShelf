@@ -8,12 +8,17 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = RoleMapper.class)
 public interface SeriesMapper {
 
     Series toSeries(final SeriesRegistration series);
 
-    @Mapping(target = "id", source = "series_id")
+    @Mapping(target = "id", source = "seriesId")
+    @Mapping(target = "title", source = "title")
+    @Mapping(target = "numberOfSeasons", source = "numberOfSeasons")
+    @Mapping(target = "platform", source = "platform")
+    @Mapping(target = "yearOfPremiere", source = "yearOfPremiere")
+    @Mapping(target = "roles", source = "roles")
     SeriesDetails toSeriesDetails(final Series series);
 
     List<SeriesDetails> toSeriesDetailsList(final List<Series> seriesList);

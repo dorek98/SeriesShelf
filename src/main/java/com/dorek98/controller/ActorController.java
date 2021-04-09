@@ -31,7 +31,7 @@ public class ActorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ActorDetails> getById(@PathVariable long id) {
+    public ResponseEntity<ActorDetails> getById(@PathVariable("id") long id) {
         return queryHandler.findById(id);
     }
 
@@ -42,7 +42,7 @@ public class ActorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ActorDetails> update(@PathVariable long id, final @Valid ActorRegistration actorRegistration) {
+    public ResponseEntity<ActorDetails> update(@PathVariable("id") long id, final @Valid ActorRegistration actorRegistration) {
         return commandHandler.update(id, actorRegistration);
     }
 }

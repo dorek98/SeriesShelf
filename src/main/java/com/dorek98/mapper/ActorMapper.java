@@ -8,12 +8,16 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = RoleMapper.class)
 public interface ActorMapper {
 
     Actor toActor(final ActorRegistration actor);
 
-    @Mapping(target = "id", source = "actor_id")
+    @Mapping(target = "id", source = "actorId")
+    @Mapping(target = "firstName", source = "firstName")
+    @Mapping(target = "lastName", source = "lastName")
+    @Mapping(target = "age", source = "age")
+    @Mapping(target = "roles", source = "roles")
     ActorDetails toActorDetails(final Actor actor);
 
     List<ActorDetails> toActorDetailsList(final List<Actor> actorList);

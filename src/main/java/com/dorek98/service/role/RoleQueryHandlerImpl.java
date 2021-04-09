@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -39,13 +38,12 @@ public class RoleQueryHandlerImpl implements RoleQueryHandler {
     }
 
     @Override
-    public ResponseEntity<RoleDetails> findByName(String name) {
-        try {
-            Role role = roleRepository.findByRoleName(name).orElseThrow(EntityNotFoundException::new);
-            RoleDetails roleDetails = roleMapper.toRoleDetails(role);
-            return ResponseEntity.ok(roleDetails);
-        } catch (EntityNotFoundException ex) {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<List<RoleDetails>> findByName(String name) {
+        List<Role> roles = roleRepository.findByRoleName(name);
+        if (roles.size() != 0) {
+            List<RoleDetails> roleDetailsList = roleMapper.toRoleDetailsList(roles);
+            return ResponseEntity.ok(roleDetailsList);
         }
+        return ResponseEntity.notFound().build();
     }
 }

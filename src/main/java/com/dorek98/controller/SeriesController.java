@@ -25,7 +25,7 @@ public class SeriesController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SeriesDetails> getById(@PathVariable long id) {
+    public ResponseEntity<SeriesDetails> getById(@PathVariable("id") long id) {
         return queryHandler.findById(id);
     }
 
@@ -36,7 +36,7 @@ public class SeriesController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SeriesDetails> update(long id, final @Valid SeriesRegistration seriesRegistration) {
+    public ResponseEntity<SeriesDetails> update(@PathVariable("id") long id, final @Valid SeriesRegistration seriesRegistration) {
         return commandHandler.update(id, seriesRegistration);
     }
 }

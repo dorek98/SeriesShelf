@@ -10,15 +10,15 @@ import lombok.Setter;
 @Setter
 public class RoleDetails {
 
-    long role_id;
+    long id;
     String roleName;
     long seriesId;
     long actorId;
 
     public RoleDetails(long id, String roleName, Series series, Actor actor) {
-        this.role_id = id;
+        this.id = id;
         this.roleName = roleName;
-        this.seriesId = series.getSeries_id();
-        this.actorId = actor.getActor_id();
+        this.seriesId = series.getSeriesId();
+        this.actorId = actor.getActorId();
     }
 }

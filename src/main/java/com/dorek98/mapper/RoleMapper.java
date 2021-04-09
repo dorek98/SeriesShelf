@@ -12,7 +12,8 @@ import java.util.List;
 public interface RoleMapper {
     Role toRole(final RoleRegistration role);
 
-    @Mapping(target = "id", source = "role_id")
+    @Mapping(target = "id", source = "roleId")
+    @Mapping(target = "roleName", source = "roleName")
     RoleDetails toRoleDetails(final Role role);
 
     List<RoleDetails> toRoleDetailsList(final List<Role> roleList);
