@@ -21,7 +21,7 @@ Project was created to learn and practice technologies required for beginner Jav
 - update name of role
 - delete role by id
 - get role by name in JSON format
-- 
+
 ![Role](https://user-images.githubusercontent.com/45879678/114220045-c6281c80-996b-11eb-866b-f26eb56e9c3f.png)
 
 #### Series:
