@@ -12,7 +12,7 @@ Project was created to learn and practice technologies required for beginner Jav
 - update data of actor 
 - get list of adult actors in JSON format
 
-![ActorController](https://user-images.githubusercontent.com/45879678/113472214-e33b8780-9461-11eb-9bf4-4941606534c8.png)
+![Actor](https://user-images.githubusercontent.com/45879678/114220013-bc061e00-996b-11eb-9142-7759d26aa90f.png)
 
 #### Roles:
 - get list of roles in JSON format
@@ -21,8 +21,8 @@ Project was created to learn and practice technologies required for beginner Jav
 - update name of role
 - delete role by id
 - get role by name in JSON format
-
-![RoleController](https://user-images.githubusercontent.com/45879678/113472215-e59de180-9461-11eb-8756-63eec7086f61.png)
+- 
+![Role](https://user-images.githubusercontent.com/45879678/114220045-c6281c80-996b-11eb-866b-f26eb56e9c3f.png)
 
 #### Series:
 - get list of series in JSON format
@@ -30,7 +30,7 @@ Project was created to learn and practice technologies required for beginner Jav
 - get series by id in JSON format
 - update data of series
 
-![SeriesController](https://user-images.githubusercontent.com/45879678/113472216-e767a500-9461-11eb-9af7-54c47fc8a700.png)
+![Series](https://user-images.githubusercontent.com/45879678/114220050-c7f1e000-996b-11eb-838a-00e1040c8646.png)
 
 
 
